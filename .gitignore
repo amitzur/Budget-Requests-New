@@ -20,3 +20,5 @@ public/docs/*
 
 public/responsive.html
 app/assets/stylesheets/responsive.scss
+
+seeds_maker.rb
