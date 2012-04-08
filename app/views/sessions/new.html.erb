@@ -1,0 +1,24 @@
+<div class="signin-wrap">
+    <h1><%=t :whats_your_mail %></h1>
+    <%= form_for(:session, :url => sessions_path) do |f| %>
+        <ul class='signin'>
+          <li class="field">
+            <div class="label">
+              <%= f.label :name, t(:name) %>
+            </div>
+            <div class="value">
+              <%= f.text_field :name %>
+            </div>
+          </li>
+          <li class="field">
+            <div class="label">
+              <%= f.label :email, t(:email) %>
+            </div>
+            <div class="value">
+              <%= f.text_field :email %>
+            </div>
+          </li>
+        </ul>
+        <button class="submit"><%=t :do_signin %></button>
+    <% end %>
+</div>

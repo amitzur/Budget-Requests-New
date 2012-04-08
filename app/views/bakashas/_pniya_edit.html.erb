@@ -1,0 +1,48 @@
+<div class='pniya' id='pniya-<%= pniya.object.mispar %>'>
+    <h4>פנייה</h4>
+    <div class='detail mispar-pniya'>
+        <label>מספר פנייה:</label>
+        <%= pniya.text_field :mispar, :class => 'mispar-pniya' %>
+        <button class='start-filling'>יאללה, מתחילים</button>
+        <span class='enter-number'>יש להכניס מספר</span>
+        <div class='question-mark'>
+            <div class='explanation'>
+                <div class='explanation-img'></div>
+                <div class='spinner'></div>
+            </div>
+        </div>
+    </div>
+    <table cellspacing=0 class='pniya-table' width="100%" id="pniya-table-<%= pniya.object.mispar %>">
+        <thead>
+            <tr>
+                <th>&nbsp;</th>
+                <th>&nbsp;</th>
+                <th>&nbsp;</th>
+                <th>&nbsp;</th>
+                <th>&nbsp;</th>
+                <th>&nbsp;</th>
+                <th>&nbsp;</th>
+                <th colspan=4>סכומי השינוי</th>
+            </tr>
+            <tr>
+                <th>מספר פרט</th>
+                <th>שם פרט</th>
+                <th>&nbsp;</th>
+                <th>הוצאה</th>
+                <th>הוצאה מותנית</th>
+                <th>הרשאה להתחייב</th>
+                <th>שכ"א</th>
+                <th>הוצאה</th>
+                <th>הוצאה מותנית</th>
+                <th>הרשאה להת'</th>
+                <th>שיא כח אדם</th>
+            </tr>
+        </thead>
+        <tbody>
+            <%= pniya.fields_for :haavaras do |h| %>
+                <%= render 'haavara_edit', :haavara => h %>
+            <% end %>
+        </tbody>
+    </table>
+    <div class='add-row'>+</div>
+</div>

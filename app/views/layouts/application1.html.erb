@@ -1,0 +1,113 @@
+<!DOCTYPE HTML>
+<html lang="he">
+<head>
+    <meta charset="UTF-8">
+    <title><%= title %></title>
+    <meta name="author" content="Amit Zur">
+    <%= stylesheet_link_tag "screen", :media => "screen" %>
+    <%= stylesheet_link_tag "ui-lightness/jquery-ui-1.8.18.custom.css", :media => "screen" %>
+    <%= javascript_include_tag "vendor/jquery-1.7.1.min.js" %>
+    <%= javascript_include_tag "vendor/handlebars-1.0.0.beta.6.js" %>
+    <%= javascript_include_tag "vendor/jquery-ui-1.8.18.custom.min.js" %>
+    <%= javascript_include_tag "vendor/jquery.ui.datepicker-he.js" %>
+    <%= javascript_include_tag "ksafim.js" %>
+</head>
+<body dir='rtl'>
+    <% flash.each do |key, value| %>
+        <div class="flash <%= key %>"><%= value %></div>
+    <% end %>
+    <!--<div class='photo'>
+        <%= yield :photo %>
+    </div>-->
+    <%= yield :file %>
+    <!--<div class="divider" id="divider"></div>-->
+    <div class='form-wrap'>
+        <%= yield %>
+    </div>
+
+
+
+    <script type="text/x-handlebar-template" id="detail-template">
+        <div class='detail'>
+            <label for="{{name}}">{{label}}</label>
+            <input type="text" value="{{value}}" id='{{name}}'/>
+        </div>
+    </script>
+
+    <script type="text/x-handlebar-template" id="haavara-template1">
+        <div class='haavara' id='haavara-{{id}}'>
+            {{#details haavaraDetails}}
+
+            {{/details}}
+        </div>
+    </script>
+
+    <script type="text/x-handlebar-template" id="pniya-row-template">
+        <tr class="pniya-row">
+            <td><input type="text" name='bakasha[pniyas_attributes][{{pniya_id}}][haavaras_attributes][{{id}}][prat]'/></td>
+            <td>&nbsp;</td>
+            <td><span>מ-</span><br><span>ל-</span></td>
+            <td><input type="text" name="bakasha[pniyas_attributes][{{pniya_id}}][haavaras_attributes][{{id}}][hostaa-from]"/><input type="text" name="bakasha[pniyas_attributes][{{pniya_id}}][haavaras_attributes][{{id}}][hotsaa-to]"/></td>
+            <td><input type="text" name="bakasha[pniyas_attributes][{{pniya_id}}][haavaras_attributes][{{id}}][hotsaa-mut-from]"/><input type="text" name="bakasha[pniyas_attributes][{{pniya_id}}][haavaras_attributes][{{id}}][hotsaa-mut]"/></td>
+            <td><input type="text" name="bakasha[pniyas_attributes][{{pniya_id}}][haavaras_attributes][{{id}}][harshaa-from]"/><input type="text" name="bakasha[pniyas_attributes][{{pniya_id}}][haavaras_attributes][{{id}}][harshaa-to]"/></td>
+            <td><input type="text" name="bakasha[pniyas_attributes][{{pniya_id}}][haavaras_attributes][{{id}}][ska-from]"/><input type="text" name="bakasha[pniyas_attributes][{{pniya_id}}][haavaras_attributes][{{id}}][ska-to]"/></td>
+            <td><input type="text" name="bakasha[pniyas_attributes][{{pniya_id}}][haavaras_attributes][{{id}}][diff-hotsaa]"/></td>
+            <td><input type="text" name="bakasha[pniyas_attributes][{{pniya_id}}][haavaras_attributes][{{id}}][diff-hotsaa-mut]"/></td>
+            <td><input type="text" name="bakasha[pniyas_attributes][{{pniya_id}}][haavaras_attributes][{{id}}][diff-harshaa]"/></td>
+            <td><input type="text" name="bakasha[pniyas_attributes][{{pniya_id}}][haavaras_attributes][{{id}}][diff-ska]"/></td>
+        </tr>
+    </script>
+
+    <script type="text/x-handlebar-template" id="pniya-template">
+        <div class='pniya' id='pniya-{{id}}'>
+            <h4>פנייה</h4>
+            <div class='detail mispar-pniya'>
+                <label for="mispar-pniya-{{id}}">מספר פנייה:</label>
+                <input type="text" id='mispar-pniya-{{id}}' class='mispar-pniya' name='bakasha[pniyas_attributes][{{id}}][mispar]'/>
+                <button class='start-filling'>יאללה, מתחילים</button>
+                <span class='enter-number'>יש להכניס מספר</span>
+                <div class='question-mark'>
+                    <div class='explanation'>
+                        <div class='explanation-img'></div>
+                        <div class='spinner'></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+
+    <script type="text/x-handlebar-template" id="pniya-table-template">
+        <table cellspacing=0 class='pniya-table' width="100%" id="pniya-table-{{id}}">
+        <thead>
+        <tr>
+            <th>&nbsp;</th>
+            <th>&nbsp;</th>
+            <th>&nbsp;</th>
+            <th>&nbsp;</th>
+            <th>&nbsp;</th>
+            <th>&nbsp;</th>
+            <th>&nbsp;</th>
+            <th colspan=4>סכומי השינוי</th>
+        </tr>
+        <tr>
+            <th>מספר פרט</th>
+            <th>שם פרט</th>
+            <th>&nbsp;</th>
+            <th>הוצאה</th>
+            <th>הוצאה מותנית</th>
+            <th>הרשאה להתחייב</th>
+            <th>שכ"א</th>
+            <th>הוצאה</th>
+            <th>הוצאה מותנית</th>
+            <th>הרשאה להת'</th>
+            <th>שיא כח אדם</th>
+        </tr>
+    </thead>
+    <tbody>
+
+    </tbody>
+</table>
+<div class='add-row'>+</div>
+</script>
+</body>
+</html>

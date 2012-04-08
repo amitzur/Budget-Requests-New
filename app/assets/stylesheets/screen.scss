@@ -1,0 +1,631 @@
+@import "compass/reset";
+
+ //////// fluid layout //////////////
+$columns: 12;
+$column-width: 60px;
+$gutter-width: 20px;
+$max-width: $columns * ($column-width + $gutter-width);
+
+$font-base: 15px;
+$font-base-line-height: 24px;
+
+@function em($target, $context: $font-base) {
+  @if $target == 0 { @return 0 }
+  @return $target / $context + 0em;
+}
+
+@function perc($width, $container-width: $max-width) {
+   @return percentage($width / $container-width);
+}
+
+@function lh($amount: 1, $context: $font-base) {
+   @return em($font-base-line-height * $amount, $context);
+}
+
+@mixin col($n, $padding: 0px, $border: 0px, $container-width: $max-width) {
+  float: right;
+  margin-right: percentage($gutter-width / $container-width);
+  width:  percentage(($n * ($column-width + $gutter-width) - $gutter-width - ($padding * 2) - ($border * 2)) / $container-width);
+  border-width: $border;
+  padding: em($padding, $font-base) percentage($padding / $container-width);
+}
+
+/////////////////////////
+
+
+
+
+
+$light-orange: #FFF3B6;
+$banana		: #F5DB58;
+$turquise	: #016881;
+$dark-turq	: #024758;
+$navy		: #012D38;
+
+
+@mixin clearfix {
+    &:after {
+        content: ".";
+        visibility: hidden;
+        display: block;
+        clear: both;
+        line-height: 0;
+        height: 0;
+    }
+}
+
+@mixin userSelectNone {
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+@mixin buttonGradient {
+    background-color: $banana;
+    background-image: -webkit-gradient(linear, left top, left bottom, from($banana), color-stop(0.49, $banana), color-stop(0.5, $light-orange), to($light-orange));
+    background-image: -moz-linear-gradient(top center, $banana, $banana 49%, $light-orange 51%, $light-orange);
+}
+
+@mixin backgroundGradient {
+  background-image: -webkit-gradient(linear, left top, left bottom, from($banana) , color-stop(0.1, $light-orange), to($light-orange));
+  background-image: -moz-linear-gradient(top center, $banana, $light-orange 150px);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#F5DB58', endColorstr='#FFF3B6');
+}
+
+@mixin boxSizing($val:border-box) {
+  -moz-box-sizing: $val;
+  -webkit-box-sizing: $val;
+  box-sizing: $val;
+}
+
+@mixin formField($labelWidth:100px, $padding: 0.8em) {
+  @include clearfix;
+  padding: $padding;
+
+  label {
+    width: $labelWidth;
+    font-weight: bold;
+    float: right;
+  }
+
+  .value {
+    margin-right: $labelWidth + 15px;
+    input {
+      border: 0;
+      width: 270px;
+    }
+  }
+}
+
+@mixin smallForm($formWidth: 400px, $labelWidth: 100px) {
+  background-color: white;
+  border-radius: 0.4em;
+  border: 1px solid black;
+  width: $formWidth;
+
+  .field {
+    @include formField($labelWidth);
+    border-top: 1px solid grey;
+    &:first-child {
+      border-top: 0;
+    }
+  }
+
+  &+.submit {
+    background-color: green;
+    border-radius: 0.4em;
+    color: white;
+    font-weight: bold;
+    width: $formWidth;
+    border: 1px solid black;
+    margin-top: 10px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 1.1em;
+  }
+}
+
+html {
+    width: 100%;
+    font: 100% "Arial", sans-serif;
+    min-height: 100%;
+}
+
+body {
+  @include backgroundGradient;
+  @include clearfix;
+  padding: 10px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+h1 {
+  font-size: 2em;
+  font-weight: bold;
+}
+
+h2 {
+    font-size: 1.2em;
+}
+
+h3, h4 {
+    margin: 0 0 10px 0;
+}
+
+
+header {
+  @include col(12);
+  position: relative;
+  @include clearfix;
+  min-height: 120px;
+  padding: 30px 0;
+  .title {
+    background-color: $light-orange;
+    -webkit-border-radius: 15px 0 0 15px;
+    -moz-border-radius: 15px 0 0 15px;
+    border: 1px solid $dark-turq;
+    box-shadow: -5px 5px 5px $dark-turq;
+    margin: 0 70px 0 0;
+    color: $navy;
+    padding: 8px;
+    position: relative;
+  }
+
+  .anti-title {
+    background-color: $light-orange;
+    -webkit-border-radius: 15px 0 0 15px;
+    -moz-border-radius: 15px 0 0 15px;
+    border: 1px solid $dark-turq;
+    box-shadow: -5px 5px 5px $dark-turq;
+    margin: 0 70px 0 0;
+    color: $navy;
+    padding: 8px;
+    position: relative;
+    -moz-transform: skew(-34deg) translateX(-11px) rotateX(180deg) scaleY(0.7);
+    -webkit-transform: skew(-34deg) translateX(-11px) rotateX(180deg) scaleY(0.7);
+    opacity: 0.2;
+  }
+
+  .subtitle {
+    @include col(7);
+    color: $navy;
+    margin-top: 20px;
+    font-style: italic;
+    font-size: 1.1em;
+    line-height: 1.2em;
+  }
+
+  .title-icon {
+    background-image: url(/assets/Document-icon.png);
+    width: 150px;
+    height: 150px;
+    background-size: 150px auto;
+    float: right;
+    position: relative;
+    top: -30px;
+    z-index: 1;
+  }
+
+  .actions {
+    @include col(2);
+    margin-top: 20px;
+  }
+}
+
+
+.form-wrap {
+    position: absolute;
+    right: 0;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    background-color: $banana;
+    @include boxSizing;
+}
+
+.form {
+  width: 100%;
+  height: 100%;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+
+.detail {
+  @include clearfix;
+}
+
+.bakasha {
+  width: 100%;
+  border-radius: 10px;
+  border: 5px solid $turquise;
+  padding: 10px;
+  color: $light-orange;
+  background-color: $navy;
+  position: relative;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+
+  h3, h4 {
+    text-decoration: underline;
+  }
+
+  .bakasha-details {
+    margin-bottom: 10px;
+
+    .detail {
+      label {
+        width: 250px;
+        float: right;
+      }
+
+      input, select {
+        float: right;
+      }
+    }
+  }
+
+  .submit {
+    @include buttonGradient;
+    position: absolute;
+    top: 30px;
+    left: 48px;
+    width: 150px;
+    height: 50px;
+    display: block;
+    border: 2px solid transparent;
+    border-radius: 1.1em;
+    font-weight: bold;
+    font-size: 1.2em;
+    box-shadow: 0 0 15px $light-orange;
+    color: $navy;
+
+    &::-moz-focus-inner {
+      border: 0;
+    }
+  }
+
+  .pniyot {
+    width: 100%;
+  }
+}
+
+.pniya {
+    padding: 10px;
+    background-color: $dark-turq;
+    margin-bottom: 10px;
+    margin-right: -10px;
+    margin-left: -10px;
+    width: 100%;
+
+    .mispar-pniya {
+      margin-bottom: 10px;
+      input.disabled {
+        background-color: silver;
+        color: grey;
+        border: 2px solid $navy;
+      }
+    }
+
+    .detail {
+        label {
+            width: 150px;
+            float: right;
+        }
+
+        input, button {
+            float: right;
+        }
+
+        span {
+            float: right;
+        }
+
+        .start-filling {
+            @include buttonGradient;
+            border: 1px solid $navy;
+            margin-right: 6px;
+            border-radius: 0.3em;
+            font-weight: bold;
+        }
+
+        .enter-number {
+            color: red;
+            display:none;
+        }
+    }
+
+    .pniya-table {
+        border: 1px solid black;
+        border-collapse: collapse;
+
+        thead {
+            tr:first-child > th:last-child {
+                border-bottom: 1px solid black;
+            }
+
+            th {
+                border-left: 1px solid black;
+                border-right: 1px solid black;
+                text-align: center;
+            }
+        }
+
+        tbody {
+            color: black;
+            .pniya-row {
+                background-color: white;
+
+                &:hover {
+                    background-color: #E8EDFF;
+                }
+
+                td {
+                    text-align: center;
+                    border: 1px solid black;
+
+                    input {
+                        width: 100%;
+                        border: 0;
+                        display: block;
+                        border: 1px solid transparent;
+                        @include boxSizing;
+
+                        &:focus {
+                          background-color: $banana;
+                          border: 1px solid black;
+                        }
+                        &:nth-child(2) {
+                          border-top: 1px dotted black;
+                        }
+                    }
+                }
+            }
+        
+            .prat-name {
+              font-weight: bold;
+              text-align: center;
+            }
+        }
+    }
+}
+
+.add-pniya, .add-row {
+    background-color: $dark-turq;
+    width: 50px;
+    height: 50px;
+    font-size: 50px;
+    font-weight: bold;
+    color: $light-orange;
+    text-align: center;
+    line-height: 45px;
+    cursor: pointer;
+    border-radius: 0.5em;
+    text-decoration: none;
+    display: block;
+    outline: 0 none;
+}
+
+.question-mark {
+    height: 28px;
+    width: 28px;
+    background-image: url(/assets/question_mark_icon_blueglow.png);
+    background-size: 28px;
+    float: right;
+    position: relative;
+    margin-right: 5px;
+
+    .explanation {
+        display:none;
+        visibility: hidden;
+        width: 200px;
+        height: 250px;
+        background-color: brown;
+        position: absolute;
+        left: -205px;
+        z-index: 10;
+    }
+
+    .explanation-img {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-size: 200px auto;
+        z-index: 11;
+    }
+
+    .spinner {
+        width: 40px;
+        height: 40px;
+        background-image: url(/assets/loading.gif);
+        background-size: 40px;
+        position: absolute;
+        top: 105px;
+        left: 80px;
+    }
+
+    &:hover .explanation {
+        display:block;
+        visibility: visible;
+    }
+}
+
+
+.detail.from-pniya {
+    .explanation {
+        height: 150px;
+    }
+}
+
+.detail.to-pniya {
+    .explanation {
+        height: 150px;
+    }
+}
+
+.detail.mispar-pniya {
+    .explanation {
+        height: 150px;
+    }
+}
+
+.detail.amount-pniya {
+    .explanation {
+        height: 150px
+    }
+}
+
+.detail.bakasha-date {
+    .explanation-img {
+        background-image : url(/assets/date.jpg)
+    }
+}
+
+.detail.bakasha-meeting-reason {
+    .explanation-img {
+        background-image: url(/assets/meeting_date.jpg)
+    }
+}
+
+.detail.mispar-pniya {
+    .explanation-img {
+        background-image: url(/assets/mispar_haavara.jpg)
+    }
+}
+
+.detail.from-pniya {
+    .explanation-img {
+        background-image: url(/assets/from_haavara.jpg)
+    }
+}
+
+.detail.to-pniya {
+    .explanation-img {
+        background-image: url(/assets/to_haavara.jpg)
+    }
+}
+
+.detail.amount-pniya {
+    .explanation-img {
+        background-image: url(/assets/amount_haavara.jpg)
+    }
+}
+
+.divider {
+    width: 4px;
+    height: 100%;
+    float: right;
+    border-left: 2px solid white;
+    border-right: 1px solid black;
+    cursor: col-resize;
+    position: relative;
+    z-index: 1;
+    background-color: #CCC;
+    box-shadow: -1px 0 1px #333;
+}
+
+
+ul.login {
+    @include smallForm;
+}
+
+.content {
+  @include col(12);
+  padding: 10px;
+}
+
+@mixin list {
+  border: 1px solid black;
+  border-radius: 0.3em;
+  background-color: white;
+  
+  li {
+    border-top: 1px solid grey;
+    padding: 4px;
+
+    &:first-child {
+      border-top: 0;
+    }
+  }
+
+}
+
+.scans-wrap {
+  @include col(4);
+  vertical-align: top;
+
+  ul.scans {
+    @include list;
+
+    &.untagged.unlogged {
+      &:hover {
+        li {
+          background-color: grey;
+          opacity: 0.8;
+          cursor: pointer;
+        }
+      }
+      
+      .logged {
+        display:none;
+      }
+    }
+  }
+
+  &:first-child {
+    margin-right: 0;
+  }
+  a {
+    text-decoration: none;
+  }
+}
+
+.file_frame {
+  width: 100%;
+  height: 400px;
+  margin-top: 10px;
+  border: 5px solid $turquise;
+  @include boxSizing;
+}
+
+.signin-wrap {
+  text-align: center;
+  h1 {
+    margin-bottom: 0.5em;
+  }
+  ul.signin {
+    @include smallForm;
+    margin: 0 auto;
+  }
+}
+
+.show-actions {
+  margin-bottom: 10px;
+}
+
+
+.bakashas-list {
+  @include list;
+  li {
+    @include clearfix;
+  }
+
+  .fields {
+    padding-left: 30px;
+    border-left: 2px solid black;
+    display: inline-block;
+    width: 400px;
+    .field {
+      @include formField($labelWidth: 170px, $padding: 0.3em);
+    }
+  }
+
+
+  .bakasha-index-actions {
+    display: inline-block;
+    padding-right:20px;
+    vertical-align: top;
+  }
+}

@@ -1,0 +1,22 @@
+# == Schema Information
+#
+# Table name: bakashas
+#
+#  id             :integer         not null, primary key
+#  recv_date      :date
+#  reason         :string(255)
+#  created_at     :datetime        not null
+#  updated_at     :datetime        not null
+#  meeting_reason :string(255)
+#  file_name      :string(255)
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  recv_date: 2012-03-25
+  reason: MyString
+
+two:
+  recv_date: 2012-03-25
+  reason: MyString

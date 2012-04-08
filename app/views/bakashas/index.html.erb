@@ -1,0 +1,25 @@
+<ul class="bakashas-list">
+<% @bakashas.each do |bakasha| %>
+  <li>
+    <div class="fields">
+      <div class="field">
+        <label><%=t :date_received %></label>
+        <div class="value">
+          <span><%= bakasha.recv_date %></span>
+        </div>
+      </div>
+      <div class="field">
+        <label><%=t :reason_for_bakasha %></label>
+        <div class="value">
+          <span><%= bakasha.meeting_reason %></span>
+        </div>
+      </div>
+    </div>
+    <div class="bakasha-index-actions">
+      <%= link_to t(:goto), bakasha %>   <br>
+     <!-- <%= link_to t(:edit), edit_bakasha_path(bakasha) %><br>
+      <%= link_to t(:delete), bakasha, confirm: 'Are you sure?', method: :delete %>-->
+    </div>
+  </li>
+<% end %>
+</ul>

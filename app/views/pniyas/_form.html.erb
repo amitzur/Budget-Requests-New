@@ -1,0 +1,25 @@
+<%= form_for(@pniya) do |f| %>
+  <% if @pniya.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@pniya.errors.count, "error") %> prohibited this pniya from being saved:</h2>
+
+      <ul>
+      <% @pniya.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :mispar %><br />
+    <%= f.number_field :mispar %>
+  </div>
+  <div class="field">
+    <%= f.label :bakasha_id %><br />
+    <%= f.number_field :bakasha_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

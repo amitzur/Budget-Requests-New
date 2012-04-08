@@ -1,0 +1,35 @@
+<%= form_for(@bakasha) do |f| %>
+    <div class='bakasha-details'>
+        <div class='detail bakasha-date'>
+            <label for='bakasha_recv_date'>נתקבל בועדת הכספים:</label>
+            <!--<input type='text' id='bakasha-date' class='bakasha-date' name='bakasha[recv_date]'/>-->
+            <%= f.text_field :recv_date, :class => 'bakasha-date' %>
+            <div class='question-mark'>
+                <div class='explanation'>
+                    <div class='explanation-img'></div>
+                    <div class='spinner'></div>
+                </div>
+            </div>
+        </div>
+        <div class='detail bakasha-meeting-reason'>
+            <label for='bakasha_meeting_reason'>סיבת הבקשה:</label>
+            <%= f.select :meeting_reason, [ ['החלטת הממשלה', 'החלטת הממשלה'], ['עודפים תקציביים', 'עודפים תקציביים']], :class => 'bakasha-meeting-reason' %>
+            <!--<select id='bakasha-meeting-reason' class='bakasha-meeting-reason' name='bakasha[meeting_reason]'>
+                <option>החלטת ממשלה</option>
+                <option>עודפים תקציביים</option>
+            </select>-->
+            <div class='question-mark'>
+                <div class='explanation'>
+                    <div class='explanation-img'></div>
+                    <div class='spinner'></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <input class='submit' type='submit' name='commit' value='הגש בקשה'/>
+    <div class='pniyot'>
+        <%= f.fields_for :pniyas do |p| %>
+            <%= render 'pniya_edit', :pniya => p %>
+        <% end %>
+    </div>
+<% end %>

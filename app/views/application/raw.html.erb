@@ -1,0 +1,5 @@
+<ul>
+    <% Dir["public/docs/pics/*"].each do |file| %>
+        <li><%= link_to file[/pics\/.*/], { :controller => 'bakashas', :action => 'new', :file_name => file } %></li>
+    <% end %>
+</ul>

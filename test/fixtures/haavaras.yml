@@ -1,0 +1,54 @@
+# == Schema Information
+#
+# Table name: haavaras
+#
+#  id              :integer         not null, primary key
+#  prat            :integer
+#  hotsaa_from     :integer
+#  hotsaa_to       :integer
+#  hotsaa_mut_from :integer
+#  hotsaa_mut_to   :integer
+#  harshaa_from    :integer
+#  harshaa_to      :integer
+#  ska_from        :integer
+#  ska_to          :integer
+#  diff_hotsaa     :integer
+#  diff_hotsaa_mut :integer
+#  diff_harshaa    :integer
+#  diff_ska        :integer
+#  created_at      :datetime        not null
+#  updated_at      :datetime        not null
+#  pniya_id        :integer
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  prat: 1
+  hotsaa_from: 1
+  hotsaa_to: 1
+  hotsaa_mut_from: 1
+  hotsaa_mut_to: 1
+  harshaa_from: 1
+  harshaa_to: 1
+  ska_from: 1
+  ska_to: 1
+  diff_hotsaa: 1
+  diff_hotsaa_mut: 1
+  diff_harshaa: 1
+  diff_ska: 1
+
+two:
+  prat: 1
+  hotsaa_from: 1
+  hotsaa_to: 1
+  hotsaa_mut_from: 1
+  hotsaa_mut_to: 1
+  harshaa_from: 1
+  harshaa_to: 1
+  ska_from: 1
+  ska_to: 1
+  diff_hotsaa: 1
+  diff_hotsaa_mut: 1
+  diff_harshaa: 1
+  diff_ska: 1

@@ -1,0 +1,1 @@
+rails generate model Haavara prat:integer hotsaa_from:integer hotsaa_to:integer hotsaa_mut_from:integer hotsaa_mut_to:integer harshaa_from:integer harshaa_to:integer ska_from:integer ska_to:integer diff_hotsaa:integer diff_hotsaa_mut:integer diff_harshaa:integer diff_ska:integer

@@ -1,0 +1,80 @@
+<% if notice %>
+    <p class="notice">הבקשה נקלטה במערכת</p>
+<% end %>
+
+<div class="show-actions">
+    <% if @bakasha.user_id == (current_user && current_user.id) %>
+      <%= link_to t(:edit), edit_bakasha_path(@bakasha) %> |
+    <% end %>
+    <%= link_to t(:back), bakashas_path %>
+</div>
+<div class='bakasha'>
+    <h3><%= t :bakasha %></h3>
+    <div class='bakasha-details'>
+      <div class='detail bakasha-date'>
+        <label for='bakasha_recv_date'>נתקבל בועדת הכספים:</label>
+        <%= @bakasha.recv_date %>
+      </div>
+      <div class='detail bakasha-meeting-reason'>
+        <label for='bakasha_meeting_reason'>סיבת הבקשה:</label>
+        <%= @bakasha.meeting_reason %>
+      </div>
+    </div>
+    <div class='pniyot'>
+      <% @bakasha.pniyas.each do |pniya| %>
+          <div class='pniya' id='pniya-{{id}}'>
+            <h4>פנייה</h4>
+
+            <div class='detail mispar-pniya'>
+              <label for="mispar-pniya-{{id}}">מספר פנייה:</label>
+              <%= pniya.mispar %>
+            </div>
+
+            <table cellspacing=0 class='pniya-table' width="100%" id="pniya-table-{{id}}">
+              <thead>
+              <tr>
+                <th>&nbsp;</th>
+                <th>&nbsp;</th>
+                <th>&nbsp;</th>
+                <th>&nbsp;</th>
+                <th>&nbsp;</th>
+                <th>&nbsp;</th>
+                <th>&nbsp;</th>
+                <th colspan=4>סכומי השינוי</th>
+              </tr>
+              <tr>
+                <th>מספר פרט</th>
+                <th>שם פרט</th>
+                <th>&nbsp;</th>
+                <th>הוצאה</th>
+                <th>הוצאה מותנית</th>
+                <th>הרשאה להתחייב</th>
+                <th>שכ"א</th>
+                <th>הוצאה</th>
+                <th>הוצאה מותנית</th>
+                <th>הרשאה להת'</th>
+                <th>שיא כח אדם</th>
+              </tr>
+              </thead>
+              <tbody>
+              <% pniya.haavaras.each do |haavara| %>
+                  <tr class="pniya-row">
+                    <td><div><%= haavara.prat %></div></td>
+                    <td class="prat-name">&nbsp;</td>
+                    <td><span>מ-</span><br><span>ל-</span></td>
+                    <td><%= haavara.hotsaa_from %><br><%= haavara.hotsaa_to %></td>
+                    <td><%= haavara.hotsaa_mut_from %><br><%= haavara.hotsaa_mut_to %></td>
+                    <td><%= haavara.harshaa_from %><br><%= haavara.harshaa_to %></td>
+                    <td><%= haavara.ska_from %><br><%= haavara.ska_to %></td>
+                    <td><%= haavara.diff_hotsaa %></td>
+                    <td><%= haavara.diff_hotsaa_mut %></td>
+                    <td><%= haavara.diff_harshaa %></td>
+                    <td><%= haavara.diff_ska %></td>
+                  </tr>
+              <% end %>
+              </tbody>
+            </table>
+          </div>
+      <% end %>
+    </div>
+</div>

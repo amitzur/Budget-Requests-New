@@ -1,0 +1,32 @@
+<%= form_for(@user) do |f| %>
+    <%= render 'shared/error_messages' %>
+
+<ul class='login'>
+    <li class="field">
+        <div class="label">
+            <%= f.label :name, t(:name) %>
+        </div>
+        <div class="value">
+            <%= f.text_field :name %>
+        </div>
+
+    </li>
+    <li class="field">
+        <div class="label">
+            <%= f.label :email, t(:email) %>
+        </div>
+        <div class="value">
+            <%= f.text_field :email %>
+        </div>
+    </li>
+    <li class="field">
+        <div class="label">
+            <%= f.label :password, t(:password) %>
+        </div>
+        <div class="value">
+            <%= f.text_field :password %>
+        </div>
+    </li>
+</ul>
+<button class="submit"><%=t :do_signup %></button>
+<% end %>

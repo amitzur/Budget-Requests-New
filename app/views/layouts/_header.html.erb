@@ -1,0 +1,15 @@
+<header>
+  <a href="/" ><img class="title-icon" src="/assets/Document-icon.png"/></a>
+  <div class="title">
+    <h1><%=t heading %></h1>
+  </div>
+  <div class="anti-title">
+    <h1><%=t heading %></h1>
+  </div>
+  <% unless @subheading.nil? %>
+    <h2 class='subtitle'><%=t @subheading %></h2>
+  <% end %>
+  <div class="actions">
+    <div class="fb-like" data-href="http://www.developforpeople.com" data-send="true" data-width="450" data-show-faces="true" data-font="arial"></div>
+  </div>
+</header>

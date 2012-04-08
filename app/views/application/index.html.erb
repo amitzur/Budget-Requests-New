@@ -1,0 +1,16 @@
+<div class="scans-wrap">
+    <h3><%=t :untagged_list %></h3>
+    <ul class='scans untagged unlogged'>
+    <% @untagged.each do |scan| %>
+         <li><a class="logged" href="/bakashas/new?sid=<%= scan.id %>"><%= scan.filename %></a><span class="unlogged"><%= scan.filename %></span></li>
+    <% end %>
+    </ul>
+</div>
+<div class="scans-wrap">
+    <h3><%= link_to t(:tagged_list), bakashas_path %></h3>
+    <ul class='scans tagged'>
+      <% @tagged.each do |item| %>
+          <li><a href="/bakashas/<%= item[:bakasha].id %>"><%= item[:scan].filename %></a></li>
+      <% end %>
+    </ul>
+</div>
