@@ -13,7 +13,9 @@
 
         FB.getLoginStatus(function(response) {
             if (response.status === 'connected') {
-                KsafimApi.enableUntaggedScans();
+                KsafimApi.signIn(function() {
+                    KsafimApi.enableUntaggedScans();
+                });
             } else if (response.status === 'not_authorized') {
                 console.log("not authorized");
             } else {
