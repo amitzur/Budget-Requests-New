@@ -20,18 +20,6 @@
                 console.log("not logged");
             }
         });
-
-        FB.Event.subscribe('auth.logout', function(response) {
-            FB.getLoginStatus(function(resp) {
-                if (resp.status != "connected") {
-                    KsafimApi.signOut();
-                }
-            });
-        });
-
-        FB.Event.subscribe('auth.login', function(response) {
-            KsafimApi.signIn();
-        });
     };
 
     // Load the SDK Asynchronously

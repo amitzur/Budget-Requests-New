@@ -182,8 +182,8 @@ header {
     color: $navy;
     padding: 8px;
     position: relative;
-    -moz-transform: skew(-34deg) translateX(-11px) rotateX(180deg) scaleY(0.7);
-    -webkit-transform: skew(-34deg) translateX(-11px) rotateX(180deg) scaleY(0.7);
+    -moz-transform: /*skew(-34deg) translateX(-11px)*/ rotateX(180deg) scaleY(0.7);
+    -webkit-transform: /*skew(-34deg) translateX(-11px)*/ rotateX(180deg) scaleY(0.7);
     opacity: 0.2;
   }
 

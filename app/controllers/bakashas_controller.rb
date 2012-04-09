@@ -30,7 +30,7 @@ class BakashasController < ApplicationController
     @bakasha = Bakasha.new
     unless params[:sid].nil?
       scan = Scan.find(params[:sid])
-      @file = '/docs/pdf/' + scan[:filename]
+      @file = 'https://s3-eu-west-1.amazonaws.com/hasadna-budget-requests/' + scan[:filename].gsub(" ", "+")
       @sid = params[:sid]
     end
     @heading = t(:if_you_came)
