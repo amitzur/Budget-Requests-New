@@ -32,6 +32,8 @@ class BakashasController < ApplicationController
       scan = Scan.find(params[:sid])
       @file = 'https://s3-eu-west-1.amazonaws.com/hasadna-budget-requests/' + scan[:filename].gsub(" ", "+")
       @sid = params[:sid]
+    else
+      redirect_to :bakashas and return
     end
     @heading = t(:if_you_came)
     @subheading = t(:it_would_be_nice)
