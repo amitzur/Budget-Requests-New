@@ -3,9 +3,6 @@
 <% end %>
 
 <div class="show-actions">
-    <% if @bakasha.user_id == (current_user && current_user.id) %>
-      <%= link_to t(:edit), edit_bakasha_path(@bakasha) %> |
-    <% end %>
     <%= link_to t(:back), bakashas_path %>
 </div>
 <div class='bakasha'>
