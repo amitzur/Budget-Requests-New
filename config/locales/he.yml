@@ -20,6 +20,7 @@ he:
     bakasha: בקשה להעברה תקציבית
     hosef: הוסף פנייה
     hagesh: הגש בקשה
+    update_bakasha: עדכן בקשה
     reason_taksiv: שינויים בתקציב
     reason_seifim: שינויים בין סעיפים
     reason_shimush: שימוש בעודפי תקציב
@@ -37,3 +38,18 @@ he:
     guest: אורח
     connecting: מתחבר...
     disconnecting: מתנתק...
+    received_bakasha: הבקשה נקלטה במערכת
+    nitkabel: נתקבל בועדת הכספים
+    sibat: סיבת הבקשה
+    mispar_pniya: מספר פנייה
+    changes_amounts: סכומי השינוי
+    mispar_prat: מספר פרט
+    name_prat: שם פרט
+    hotsaa: הוצאה
+    hotsaa_mut: הוצאה מותנית
+    harshaa: הרשאה להתחייב
+    ska: שיא כח אדם
+    ska_abbr: שכ"א
+    start_filling: יאללה, מתחילים
+    enter_number: יש להכניס מספר
+    pniya: פנייה

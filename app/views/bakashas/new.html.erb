@@ -5,7 +5,7 @@
         <%= f.hidden_field :scan_id, :value => @sid %>
         <div class='bakasha-details'>
           <div class='detail bakasha-date'>
-            <label for='bakasha_recv_date'>נתקבל בועדת הכספים:</label>
+            <label for='bakasha_recv_date'><%=t :nitkabel %>:</label>
             <%= f.text_field :recv_date, :class => 'bakasha-date' %>
             <div class='question-mark'>
               <div class='explanation'>
@@ -15,7 +15,7 @@
             </div>
           </div>
           <div class='detail bakasha-meeting-reason'>
-            <label for='bakasha_meeting_reason'>סיבת הבקשה:</label>
+            <label for='bakasha_meeting_reason'><%=t :sibat %>:</label>
             <%= f.select :meeting_reason, [[t(:reason_taksiv), t(:reason_taksiv)], [t(:reason_seifim), t(:reason_seifim)], [t(:reason_shimush), t(:reason_shimush)], [t(:reason_reserve), t(:reason_reserve)]], :class => 'bakasha-meeting-reason' %>
             <div class='question-mark'>
               <div class='explanation'>
@@ -83,13 +83,13 @@
 
     <script type="text/x-handlebar-template" id="pniya-template">
       <div class='pniya' id='pniya-{{id}}'>
-        <h4>פנייה</h4>
+        <h4><%=t :pniya %></h4>
 
         <div class='detail mispar-pniya'>
-          <label for="mispar-pniya-{{id}}">מספר פנייה:</label>
+          <label for="mispar-pniya-{{id}}"><%=t :mispar_pniya %>:</label>
           <input type="text" id='mispar-pniya-{{id}}' name='bakasha[pniyas_attributes][{{id}}][mispar]'/>
-          <button class='start-filling'>יאללה, מתחילים</button>
-          <span class='enter-number'>יש להכניס מספר</span>
+          <button class='start-filling'><%=t :start_filling %></button>
+          <span class='enter-number'><%=t :enter_number %></span>
 
           <div class='question-mark'>
             <div class='explanation'>
@@ -112,20 +112,20 @@
           <th>&nbsp;</th>
           <th>&nbsp;</th>
           <th>&nbsp;</th>
-          <th colspan=4>סכומי השינוי</th>
+          <th colspan=4><%=t :changes_amounts %>
         </tr>
         <tr>
-          <th>מספר פרט</th>
-          <th>שם פרט</th>
+          <th><%=t :mispar_prat %></th>
+          <th><%=t :name_prat %></th>
           <th>&nbsp;</th>
-          <th>הוצאה</th>
-          <th>הוצאה מותנית</th>
-          <th>הרשאה להתחייב</th>
-          <th>שכ"א</th>
-          <th>הוצאה</th>
-          <th>הוצאה מותנית</th>
-          <th>הרשאה להת'</th>
-          <th>שיא כח אדם</th>
+          <th><%=t :hotsaa %></th>
+          <th><%=t :hotsaa_mut %></th>
+          <th><%=t :harshaa %></th>
+          <th><%=t :ska %></th>
+          <th><%=t :hotsaa %></th>
+          <th><%=t :hotsaa_mut %></th>
+          <th><%=t :harshaa %></th>
+          <th><%=t :ska_abbr %></th>
         </tr>
         </thead>
         <tbody>

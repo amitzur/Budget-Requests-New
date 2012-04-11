@@ -1,10 +1,206 @@
 <div class='form'>
-    <div class='title-icon'></div>
-    <h1 class='title'>אם כבר הגעת לכאן...</h1>
-    <h2 class='subtitle'>יהיה נחמד אם תואיל/י למלא את הפרטים הבאים בהתאם לתמונות מימין:</h2>
-    <div class='bakasha'>
-        <h3>בקשה להעברה תקציבית</h3>
-        <%= render 'form' %>
-        <div id='add-pniya' class='add-pniya' title='הוסף פנייה'>+</div>
-    </div>
+  <div class='bakasha'>
+    <h3><%= t :bakasha %></h3>
+    <%= form_for(@bakasha) do |f| %>
+        <%= f.hidden_field :scan_id, :value => @sid %>
+        <div class='bakasha-details'>
+          <div class='detail bakasha-date'>
+            <label for='bakasha_recv_date'><%=t :nitkabel %>:</label>
+            <%= f.text_field :recv_date, :class => 'bakasha-date' %>
+            <div class='question-mark'>
+              <div class='explanation'>
+                <div class='explanation-img'></div>
+                <div class='spinner'></div>
+              </div>
+            </div>
+          </div>
+          <div class='detail bakasha-meeting-reason'>
+            <label for='bakasha_meeting_reason'><%=t :sibat %>:</label>
+            <%= f.select :meeting_reason, [[t(:reason_taksiv), t(:reason_taksiv)], [t(:reason_seifim), t(:reason_seifim)], [t(:reason_shimush), t(:reason_shimush)], [t(:reason_reserve), t(:reason_reserve)]], :class => 'bakasha-meeting-reason' %>
+            <div class='question-mark'>
+              <div class='explanation'>
+                <div class='explanation-img'></div>
+                <div class='spinner'></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <%= f.submit :class => 'submit', :value => t(:update_bakasha) %>
+
+        <div class='pniyot'>
+          <% @bakasha.pniyas.each do |pniya| %>
+              <div class='pniya' id='pniya-<%= pniya.mispar %>'>
+                <h4>פנייה</h4>
+
+                <div class='detail mispar-pniya'>
+                  <label for="mispar-pniya-<%= pniya.mispar %>"><%=t :mispar_pniya %>:</label>
+                  <input type="hidden" id='mispar-pniya-<%= pniya.mispar %>' name='bakasha[pniyas_attributes][<%= pniya.mispar %>][mispar]' value="<%= pniya.mispar %>"/>
+                  <%= pniya.mispar %>
+              </div>
+
+                <table cellspacing=0 class='pniya-table' width="100%" id="pniya-table-<%= pniya.mispar %>">
+                  <thead>
+                  <tr>
+                    <th>&nbsp;</th>
+                    <th>&nbsp;</th>
+                    <th>&nbsp;</th>
+                    <th>&nbsp;</th>
+                    <th>&nbsp;</th>
+                    <th>&nbsp;</th>
+                    <th>&nbsp;</th>
+                    <th colspan=4><%=t :changes_amounts %>
+                  </tr>
+                  <tr>
+                    <th><%=t :mispar_prat %></th>
+                    <th><%=t :name_prat %></th>
+                    <th>&nbsp;</th>
+                    <th><%=t :hotsaa %></th>
+                    <th><%=t :hotsaa_mut %></th>
+                    <th><%=t :harshaa %></th>
+                    <th><%=t :ska %></th>
+                    <th><%=t :hotsaa %></th>
+                    <th><%=t :hotsaa_mut %></th>
+                    <th><%=t :harshaa %></th>
+                    <th><%=t :ska_abbr %></th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <% pniya.haavaras.each do |haavara| %>
+                      <tr class="pniya-row">
+                        <td><input type="text" class="prat" name='bakasha[pniyas_attributes][<%= pniya.mispar %>][haavaras_attributes][{{id}}][prat]' value='<%= haavara.prat %>'/></td>
+                        <td class="prat-name">&nbsp;</td>
+                        <td><span>מ-</span><br><span>ל-</span></td>
+                        <td>
+                          <input type="text" name="bakasha[pniyas_attributes][<%= pniya.mispar %>][haavaras_attributes][{{id}}][hotsaa_from]" value='<%= haavara.hotsaa_from %>'/><input type="text" name="bakasha[pniyas_attributes][<%= pniya.mispar %>][haavaras_attributes][{{id}}][hotsaa_to]" value='<%= haavara.hotsaa_to %>'/>
+                        </td>
+                        <td>
+                          <input type="text" name="bakasha[pniyas_attributes][<%= pniya.mispar %>][haavaras_attributes][{{id}}][hotsaa_mut_from]" value='<%= haavara.hotsaa_mut_from %>'/><input type="text" name="bakasha[pniyas_attributes][<%= pniya.mispar %>][haavaras_attributes][{{id}}][hotsaa_mut_to]" value='<%= haavara.hotsaa_mut_to %>'/>
+                        </td>
+                        <td>
+                          <input type="text" name="bakasha[pniyas_attributes][<%= pniya.mispar %>][haavaras_attributes][{{id}}][harshaa_from]" value='<%= haavara.harshaa_from %>'/><input type="text" name="bakasha[pniyas_attributes][<%= pniya.mispar %>][haavaras_attributes][{{id}}][harshaa_to]" value='<%= haavara.harshaa_to %>'/>
+                        </td>
+                        <td>
+                          <input type="text" name="bakasha[pniyas_attributes][<%= pniya.mispar %>][haavaras_attributes][{{id}}][ska_from]" value='<%= haavara.ska_from %>'/><input type="text" name="bakasha[pniyas_attributes][<%= pniya.mispar %>][haavaras_attributes][{{id}}][ska_to]" value='<%= haavara.ska_to %>'/>
+                        </td>
+                        <td><input type="text" name="bakasha[pniyas_attributes][<%= pniya.mispar %>][haavaras_attributes][{{id}}][diff_hotsaa]" value='<%= haavara.diff_hotsaa %>'/>
+                        </td>
+                        <td>
+                          <input type="text" name="bakasha[pniyas_attributes][<%= pniya.mispar %>][haavaras_attributes][{{id}}][diff_hotsaa_mut]" value='<%= haavara.diff_hotsaa_mut %>'/>
+                        </td>
+                        <td><input type="text" name="bakasha[pniyas_attributes][<%= pniya.mispar %>][haavaras_attributes][{{id}}][diff_harshaa]" value='<%= haavara.diff_harshaa %>'/>
+                        </td>
+                        <td><input type="text" name="bakasha[pniyas_attributes][<%= pniya.mispar %>][haavaras_attributes][{{id}}][diff_ska]" value='<%= haavara.diff_ska %>'/></td>
+                      </tr>
+                  <% end %>
+                  </tbody>
+                </table>
+                <div class='add-row'>+</div>
+              </div>
+          <% end %>
+        </div>
+    <% end %>
+    <%= link_to_function '+', 'KsafimApi.createPniya();', :class => 'add-pniya', :title => t(:hosef), :id => 'add-pniya' %>
+  </div>
+  <% unless @file.nil? %>
+      <iframe class="file_frame" src="<%= @file %>"></iframe>
+  <% end %>
 </div>
+
+<% content_for :templates do %>
+    <script type="text/x-handlebar-template" id="detail-template">
+      <div class='detail'>
+        <label for="{{name}}">{{label}}</label>
+        <input type="text" value="{{value}}" id='{{name}}'/>
+      </div>
+    </script>
+
+    <script type="text/x-handlebar-template" id="haavara-template1">
+      <div class='haavara' id='haavara-{{id}}'>
+        {{#details haavaraDetails}}
+
+        {{/details}}
+      </div>
+    </script>
+
+    <script type="text/x-handlebar-template" id="pniya-row-template">
+      <tr class="pniya-row">
+        <td><input type="text" class="prat" name='bakasha[pniyas_attributes][{{pniya_id}}][haavaras_attributes][{{id}}][prat]'/></td>
+        <td class="prat-name">&nbsp;</td>
+        <td><span>מ-</span><br><span>ל-</span></td>
+        <td>
+          <input type="text" name="bakasha[pniyas_attributes][{{pniya_id}}][haavaras_attributes][{{id}}][hotsaa_from]"/><input type="text" name="bakasha[pniyas_attributes][{{pniya_id}}][haavaras_attributes][{{id}}][hotsaa_to]"/>
+        </td>
+        <td>
+          <input type="text" name="bakasha[pniyas_attributes][{{pniya_id}}][haavaras_attributes][{{id}}][hotsaa_mut_from]"/><input type="text" name="bakasha[pniyas_attributes][{{pniya_id}}][haavaras_attributes][{{id}}][hotsaa_mut_to]"/>
+        </td>
+        <td>
+          <input type="text" name="bakasha[pniyas_attributes][{{pniya_id}}][haavaras_attributes][{{id}}][harshaa_from]"/><input type="text" name="bakasha[pniyas_attributes][{{pniya_id}}][haavaras_attributes][{{id}}][harshaa_to]"/>
+        </td>
+        <td>
+          <input type="text" name="bakasha[pniyas_attributes][{{pniya_id}}][haavaras_attributes][{{id}}][ska_from]"/><input type="text" name="bakasha[pniyas_attributes][{{pniya_id}}][haavaras_attributes][{{id}}][ska_to]"/>
+        </td>
+        <td><input type="text" name="bakasha[pniyas_attributes][{{pniya_id}}][haavaras_attributes][{{id}}][diff_hotsaa]"/>
+        </td>
+        <td>
+          <input type="text" name="bakasha[pniyas_attributes][{{pniya_id}}][haavaras_attributes][{{id}}][diff_hotsaa_mut]"/>
+        </td>
+        <td><input type="text" name="bakasha[pniyas_attributes][{{pniya_id}}][haavaras_attributes][{{id}}][diff_harshaa]"/>
+        </td>
+        <td><input type="text" name="bakasha[pniyas_attributes][{{pniya_id}}][haavaras_attributes][{{id}}][diff_ska]"/></td>
+      </tr>
+    </script>
+
+    <script type="text/x-handlebar-template" id="pniya-template">
+      <div class='pniya' id='pniya-{{id}}'>
+        <h4>פנייה</h4>
+
+        <div class='detail mispar-pniya'>
+          <label for="mispar-pniya-{{id}}"><%=t :mispar_pniya %>:</label>
+          <input type="text" id='mispar-pniya-{{id}}' name='bakasha[pniyas_attributes][{{id}}][mispar]'/>
+          <button class='start-filling'><%=t :start_filling %></button>
+          <span class='enter-number'><%=t :enter_number %></span>
+
+          <div class='question-mark'>
+            <div class='explanation'>
+              <div class='explanation-img'></div>
+              <div class='spinner'></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </script>
+
+    <script type="text/x-handlebar-template" id="pniya-table-template">
+      <table cellspacing=0 class='pniya-table' width="100%" id="pniya-table-{{id}}">
+        <thead>
+        <tr>
+          <th>&nbsp;</th>
+          <th>&nbsp;</th>
+          <th>&nbsp;</th>
+          <th>&nbsp;</th>
+          <th>&nbsp;</th>
+          <th>&nbsp;</th>
+          <th>&nbsp;</th>
+          <th colspan=4><%=t :changes_amounts %>
+        </tr>
+        <tr>
+          <th><%=t :mispar_prat %></th>
+          <th><%=t :name_prat %></th>
+          <th>&nbsp;</th>
+          <th><%=t :hotsaa %></th>
+          <th><%=t :hotsaa_mut %></th>
+          <th><%=t :harshaa %></th>
+          <th><%=t :ska %></th>
+          <th><%=t :hotsaa %></th>
+          <th><%=t :hotsaa_mut %></th>
+          <th><%=t :harshaa %></th>
+          <th><%=t :ska_abbr %></th>
+        </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+      </table>
+      <div class='add-row'>+</div>
+    </script>
+<% end %>
