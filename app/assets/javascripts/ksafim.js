@@ -32,7 +32,11 @@
         },
 
         signIn: function() {
+            $("header .connecting").addClass("active");
+            $("header .sign-in").addClass("connecting");
             $.getJSON("/users/auth/facebook/callback", function(json) {
+                $("header .sign-in").removeClass("connecting");
+                $("header .connecting").removeClass("active");
                 if (json.status == "failure") {
                     alert("failure: " + json.reason);
                     KsafimApi.changeUser();
@@ -46,10 +50,14 @@
         },
 
         signOut: function() {
+            $("header .disconnecting").addClass("active");
+            $("header .sign-out").addClass("connecting");
             $.ajax({
                 type: "delete",
                 url: "/users/sign_out",
                 success: function() {
+                    $("header .sign-out").removeClass("connecting");
+                    $("header .disconnecting").removeClass("active");
                     KsafimApi.changeUser();
                     KsafimApi.enableUntaggedScans(true);
                 }
