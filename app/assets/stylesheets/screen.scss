@@ -170,6 +170,27 @@ header {
     color: $navy;
     padding: 8px;
     position: relative;
+
+    .hello-user {
+      float: left;
+      position:relative;
+      top: -1.45em;
+
+      .hello-user-actions, .hello-user-actions-guest {
+        display: none;
+        &.active {
+          display: inline;
+        }
+      }
+      .sign-in, .sign-out {
+        cursor: pointer;
+        text-decoration: underline;
+        color: $turquise;
+        &:active {
+          color: $banana;
+        }
+      }
+    }
   }
 
   .anti-title {
@@ -559,17 +580,35 @@ ul.login {
   ul.scans {
     @include list;
 
-    &.untagged.unlogged {
-      &:hover {
+    &.untagged {
+      &.unlogged {
         li {
-          background-color: grey;
-          opacity: 0.8;
-          cursor: pointer;
+          a.logged {
+            display: none;
+          }
+
+          span.unlogged {
+            display: block;
+          }
+        }
+
+        &:hover {
+          li {
+            background-color: grey;
+            opacity: 0.8;
+            cursor: pointer;
+          }
         }
       }
-      
-      .logged {
-        display:none;
+
+      li {
+        a.logged {
+          display: block;
+        }
+
+        span.unlogged {
+          display: none;
+        }
       }
     }
   }

@@ -2,6 +2,17 @@
   <a href="/" ><img class="title-icon" src="/assets/Document-icon.png"/></a>
   <div class="title">
     <h1><%=t heading %></h1>
+    <div class='hello-user'>
+        <%=t :hello %>
+        <span class="hello-user-actions <% if user_signed_in? %>active<% end %>">
+            <span class='user-name'><%= current_user && current_user.name %></span> |
+            <span class='sign-out'><%=t :sign_out %></span>
+        </span>
+        <span class="hello-user-actions-guest <% unless user_signed_in? %>active<% end %>">
+            <span class='user-name-guest'><%=t :guest %></span> |
+            <span class='sign-in'><%=t :sign_in %></span>
+        </span>
+    </div>
   </div>
   <div class="anti-title">
     <h1><%=t heading %></h1>

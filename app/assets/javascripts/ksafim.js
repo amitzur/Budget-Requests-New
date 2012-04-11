@@ -20,10 +20,8 @@
             });
         },
 
-        enableUntaggedScans: function() {
-            $("ul.scans.untagged .unlogged").each(function() { $(this).css("display", "none"); });
-            $("ul.scans.untagged .logged").each(function() { $(this).css("display", "block"); });
-            $("ul.scans.untagged").removeClass("unlogged");
+        enableUntaggedScans: function(toDisabled) {
+            $("ul.scans.untagged")[toDisabled ? "addClass" : "removeClass"]("unlogged");
         },
 
         getUserData: function() {
@@ -33,25 +31,43 @@
             });
         },
 
-        signIn: function(sc) {
+        signIn: function() {
             $.getJSON("/users/auth/facebook/callback", function(json) {
-                if (json.status == "failure")
+                if (json.status == "failure") {
                     alert("failure: " + json.reason);
-                else
-                    sc && sc();
+                    KsafimApi.changeUser();
+                    KsafimApi.enableUntaggedScans(true);
+                }
+                else {
+                    KsafimApi.changeUser(json.extra.raw_info.name);
+                    KsafimApi.enableUntaggedScans();
+                }
             });
         },
 
-        signOut: function(sc) {
+        signOut: function() {
             $.ajax({
                 type: "delete",
                 url: "/users/sign_out",
                 success: function() {
-                    sc && sc();
+                    KsafimApi.changeUser();
+                    KsafimApi.enableUntaggedScans(true);
                 }
             });
+        },
+
+        changeUser: function(name) {
+            if (!name) {
+                $("header .user-name").text("");
+                $("header .hello-user-actions").removeClass("active");
+                $("header .hello-user-actions-guest").addClass("active");
+            } else if (typeof name == "string") {
+                $("header .user-name").text(name);
+                $("header .hello-user-actions").addClass("active");
+                $("header .hello-user-actions-guest").removeClass("active");
+            }
         }
-    };
+    }
 
 
     $(function() {
@@ -59,7 +75,7 @@
         createWidgets();
         createBindings();
         adjustPdfFrame();
-        pniyaNum = $("div[id^=pniya-]").length
+        pniyaNum = $("div[id^=pniya-]").length;
     });
 
     function createTemplate() {
@@ -122,7 +138,13 @@
             }
         });
 
-        $("ul.scans.untagged").bind("click", doLogin);
+        $("ul.scans.untagged.unlogged").live("click", doLogin);
+
+        $(".sign-in").bind("click", doLogin);
+
+        $(".sign-out").bind("click", function() {
+            KsafimApi.signOut();
+        });
     }
 
     var Template, pniyaNum;
@@ -156,13 +178,20 @@
 
 
     function doLogin() {
-        FB.login(function(response) {
-            if (response.authResponse) {
-                KsafimApi.signIn(function() {
-                    KsafimApi.enableUntaggedScans();
-                });
+        FB.getLoginStatus(function(response) {
+            if (response.status === 'connected') {
+                KsafimApi.signIn();
             } else {
-                console.log('User cancelled login or did not fully authorize.');
+                FB.login(function(response) {
+                    if (response.authResponse) {
+                        KsafimApi.signIn(function() {
+                            KsafimApi.changeUser(response.authResponse.name);
+                            KsafimApi.enableUntaggedScans();
+                        });
+                    } else {
+                        console.log('User cancelled login or did not fully authorize.');
+                    }
+                });
             }
         });
     }
