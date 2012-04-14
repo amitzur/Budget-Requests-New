@@ -74,8 +74,21 @@
                 $("header .hello-user-actions").addClass("active");
                 $("header .hello-user-actions-guest").removeClass("active");
             }
+        },
+
+        addRow: function($pniya) {
+            var id = $pniya.attr("id").split("-")[1], row = $pniya.data("rows");
+            if (!row) {
+                row = 1;
+            } else {
+                row++;
+            }
+            $pniya.data("rows", row);
+            var $newRow = $(Template.row({ pniya_id : id, id: row }))
+            $newRow.appendTo($pniya.find(".pniya-table").children("tbody"));
+            $(".prat", $newRow).focus();
         }
-    }
+    };
 
 
     $(function() {
@@ -101,7 +114,7 @@
     function createBindings() {
 
         $(".add-row").live("click", function() {
-            addRow($(this).closest(".pniya"));
+            KsafimApi.addRow($(this).closest(".pniya"));
         });
 
         $("#divider").bind("mousedown", function() {
@@ -126,7 +139,7 @@
             $input.bind("keypress mousedown", function() { return false; }).addClass("disabled");
             var $pniyaTable = $(Template.pniyaTable({ id: id }));
             $pniya.append($pniyaTable);
-            addRow($pniya);
+            KsafimApi.addRow($pniya);
             $this.remove();
             $(".enter-number", $pniya).remove();
             e.preventDefault();
@@ -161,17 +174,6 @@
         var distance = window.innerWidth - e.pageX;
         $(".photo").css("width", distance);
         $(".form-wrap").css("right", distance + 8);
-    }
-
-    function addRow($pniya) {
-        var id = $pniya.attr("id").split("-")[1], row = $pniya.data("rows");
-        if (!row) {
-            row = 1;
-        } else {
-            row++;
-        }
-        $pniya.data("rows", row);
-        $(Template.row({ pniya_id : id, id: row })).appendTo($pniya.find(".pniya-table").children("tbody"));
     }
 
     function adjustPdfFrame() {

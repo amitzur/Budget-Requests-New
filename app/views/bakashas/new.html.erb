@@ -1,3 +1,7 @@
+<% content_for :javascripts do %>
+    <%= javascript_include_tag "edit.js" %>
+<% end %>
+
 <div class='form'>
   <div class='bakasha'>
     <h3><%= t :bakasha %></h3>
@@ -55,7 +59,7 @@
 
     <script type="text/x-handlebar-template" id="pniya-row-template">
       <tr class="pniya-row">
-        <td><input type="text" class="prat" name='bakasha[pniyas_attributes][{{pniya_id}}][haavaras_attributes][{{id}}][prat]'/></td>
+        <td><input type="text" class="prat one" name='bakasha[pniyas_attributes][{{pniya_id}}][haavaras_attributes][{{id}}][prat]'/></td>
         <td class="prat-name">&nbsp;</td>
         <td><span>מ-</span><br><span>ל-</span></td>
         <td>
@@ -70,14 +74,14 @@
         <td>
           <input type="text" name="bakasha[pniyas_attributes][{{pniya_id}}][haavaras_attributes][{{id}}][ska_from]"/><input type="text" name="bakasha[pniyas_attributes][{{pniya_id}}][haavaras_attributes][{{id}}][ska_to]"/>
         </td>
-        <td><input type="text" name="bakasha[pniyas_attributes][{{pniya_id}}][haavaras_attributes][{{id}}][diff_hotsaa]"/>
+        <td><input class="diff one" type="text" name="bakasha[pniyas_attributes][{{pniya_id}}][haavaras_attributes][{{id}}][diff_hotsaa]"/>
         </td>
         <td>
-          <input type="text" name="bakasha[pniyas_attributes][{{pniya_id}}][haavaras_attributes][{{id}}][diff_hotsaa_mut]"/>
+          <input class="diff one" type="text" name="bakasha[pniyas_attributes][{{pniya_id}}][haavaras_attributes][{{id}}][diff_hotsaa_mut]"/>
         </td>
-        <td><input type="text" name="bakasha[pniyas_attributes][{{pniya_id}}][haavaras_attributes][{{id}}][diff_harshaa]"/>
+        <td><input class="diff one" type="text" name="bakasha[pniyas_attributes][{{pniya_id}}][haavaras_attributes][{{id}}][diff_harshaa]"/>
         </td>
-        <td><input type="text" name="bakasha[pniyas_attributes][{{pniya_id}}][haavaras_attributes][{{id}}][diff_ska]"/></td>
+        <td><input class="diff one" type="text" name="bakasha[pniyas_attributes][{{pniya_id}}][haavaras_attributes][{{id}}][diff_ska]"/></td>
       </tr>
     </script>
 

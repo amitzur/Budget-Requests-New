@@ -12,6 +12,7 @@
   <%= javascript_include_tag "vendor/jquery.ui.datepicker-he.js" %>
   <%= javascript_include_tag "detect_pdf.js" %>
   <%= javascript_include_tag "ksafim.js" %>
+  <%= yield :javascripts %>
 </head>
 <body dir='rtl'>
     <%= render 'layouts/facebook' %>
