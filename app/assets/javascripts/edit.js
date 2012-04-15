@@ -2,19 +2,21 @@
 
 ;(function() {
     $(function() {
-        $(".pniya tr:last-child td:last-child input").live("keypress", function(e) {
-            if (e.keyCode == 9) {
+        var sid = new Uri(location).getQueryParamValue('sid');
+        var storageName = "hasadnaBudgetRequests" + sid;
+        var bakasha = localStorage.getItem(storageName);
+        bakasha = (bakasha && JSON.parse(bakasha)) || {};
+        fillFields(bakasha);
+
+        $(".pniya tr.pniya-row:last-child td:last-child input").live("keypress", function(e) {
+            if (e.keyCode == 9 && !e.shiftKey) {
                 KsafimApi.addRow($(this).closest(".pniya"));
                 e.preventDefault();
             }
         });
 
         $(".pniya input.diff").live("change", function() {
-            var $this = $(this);
-            if ($this.val() > 0)
-                $this.addClass("positive").removeClass("negative");
-            else if ($this.val() < 0)
-                $this.addClass("negative").removeClass("positive");
+            colorDiff($(this));
         });
 
         $(".pniya-table input").live("change", function() {
@@ -25,5 +27,67 @@
                 $this.removeClass("invalid");
             }
         });
+
+        setInterval(function() {
+            bakasha = buildBakasha();
+            localStorage.setItem(storageName, JSON.stringify(bakasha));
+        }, 1000);
     });
+
+    function colorDiff($input) {
+        if ($input.val() > 0)
+            $input.addClass("positive").removeClass("negative");
+        else if ($input.val() < 0)
+            $input.addClass("negative").removeClass("positive");
+    }
+
+    function buildBakasha() {
+        var bakasha = {
+            recv_date: $("#bakasha_recv_date").val(),
+            meeting_reason: $("#bakasha_meeting_reason").val(),
+            pniyot: []
+        };
+        $(".pniya").each(function() {
+            var $pniya = $(this);
+            var pniyaObj = {
+                mispar: $('.mispar-pniya input', $pniya).val(),
+                haavarot: []
+            };
+            bakasha.pniyot.push(pniyaObj);
+            $(".pniya-row", $pniya).each(function() {
+                var $haavara = $(this), haavara = {
+                    name: $(".prat-name", $haavara).text(),
+                    numbers: []
+                };
+                pniyaObj.haavarot.push(haavara);
+                $("input", $haavara).each(function() {
+                    haavara.numbers.push($(this).val());
+                });
+            });
+        });
+        return bakasha;
+    }
+
+    function fillFields(bakasha) {
+        $("#bakasha_recv_date").val(bakasha.recv_date);
+        $("#bakasha_meeting_reason").val(bakasha.meeting_reason);
+        bakasha.pniyot && bakasha.pniyot.forEach(function(pniya) {
+            var $pniya = KsafimApi.createPniya({ noAnimation: true });
+            $(".mispar-pniya input", $pniya).val(pniya.mispar);
+            if (pniya.haavarot && pniya.haavarot.length) {
+                KsafimApi.addPniyaTable($pniya);
+            }
+            pniya.haavarot.forEach(function(haavara) {
+                var $haavara = KsafimApi.addRow($pniya);
+                var $inputs = $("input", $haavara);
+                for (var i= 0, ii=haavara.numbers.length; i < ii; i++) {
+                    var $input = $($inputs.get(i));
+                    $input.val(haavara.numbers[i]);
+                    if ($input.hasClass("diff"))
+                        colorDiff($input);
+                }
+                $(".prat-name", $haavara).text(haavara.name);
+            });
+        });
+    }
 })();

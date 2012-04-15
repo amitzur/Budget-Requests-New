@@ -1,5 +1,6 @@
 <% content_for :javascripts do %>
     <%= javascript_include_tag "edit.js" %>
+    <%= javascript_include_tag "vendor/jsuri-1.1.1.min.js" %>
 <% end %>
 
 <div class='form'>
@@ -106,7 +107,7 @@
     </script>
 
     <script type="text/x-handlebar-template" id="pniya-table-template">
-      <table cellspacing=0 class='pniya-table' width="100%" id="pniya-table-{{id}}">
+      <table cellspacing=0 class='pniya-table' width="100%">
         <thead>
         <tr>
           <th>&nbsp;</th>

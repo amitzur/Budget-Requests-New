@@ -404,6 +404,8 @@ header {
                         display: block;
                         border: 1px solid transparent;
                         direction: ltr;
+                        text-align: right;
+                        background-color: rgba(255, 255, 255, 0.3);
                         @include boxSizing;
 
                         &:focus {

@@ -7,9 +7,12 @@
  */
 (function($) {
     window.KsafimApi = {
-        createPniya: function() {
-            var $pniya = $(Template.pniya({ id: pniyaNum++ })).hide();
+        createPniya: function(opts) {
+            opts || (opts = {});
+            var $pniya = $(Template.pniya({ id: pniyaNum++ }));
             $(".pniyot").append($pniya);
+            if (opts.noAnimation) return $pniya;
+            $pniya.hide();
             $pniya.fadeIn(800, function() {
                 $(this).find("input").focus().bind("keypress", function(e) {
                     if (e.keyCode == 13) {
@@ -18,6 +21,7 @@
                     }
                 });
             });
+            return $pniya;
         },
 
         enableUntaggedScans: function(toDisabled) {
@@ -76,6 +80,10 @@
             }
         },
 
+        addPniyaTable: function($pniya) {
+            $(Template.pniyaTable({})).appendTo($pniya);
+        },
+
         addRow: function($pniya) {
             var id = $pniya.attr("id").split("-")[1], row = $pniya.data("rows");
             if (!row) {
@@ -87,6 +95,7 @@
             var $newRow = $(Template.row({ pniya_id : id, id: row }))
             $newRow.appendTo($pniya.find(".pniya-table").children("tbody"));
             $(".prat", $newRow).focus();
+            return $newRow;
         }
     };
 
@@ -137,8 +146,7 @@
             id = Number(id);
 
             $input.bind("keypress mousedown", function() { return false; }).addClass("disabled");
-            var $pniyaTable = $(Template.pniyaTable({ id: id }));
-            $pniya.append($pniyaTable);
+            KsafimApi.addPniyaTable($pniya);
             KsafimApi.addRow($pniya);
             $this.remove();
             $(".enter-number", $pniya).remove();
