@@ -300,7 +300,7 @@ header {
 
     .bakasha-description {
       textarea {
-        background-color: $light-orange;
+        background-color: snow;
         border: 1px solid $turquise;
         border-radius: 0.4em;
         padding: 0.4em;
@@ -714,5 +714,40 @@ ul.login {
     display: inline-block;
     padding-right:20px;
     vertical-align: top;
+  }
+}
+
+.save-button {
+  border-radius: 2em;
+  //background-color: rgba(255,255,255,0.3);
+  box-shadow: 0 0 2em white inset;
+  padding: 1em;
+  position: fixed;
+  top: 50px;
+  left: 50px;
+
+  button {
+    &.saved {
+      background-color: rgba(0, 255, 0, 0.4);
+      span.saved {
+        display: inline;
+      }
+      span.save-now {
+        display: none;
+      }
+    }
+
+    border: 1px solid $dark-turq;
+    box-shadow: 2px 2px 1px black;
+    font-size: 1.1em;
+    padding: 0 1em;
+
+    background-color: rgba(255, 0, 0, 0.4);
+    span.saved {
+      display: none;
+    }
+    span.save-now {
+      display: inline;
+    }
   }
 }

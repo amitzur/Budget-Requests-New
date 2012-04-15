@@ -1,12 +1,21 @@
 // Created by Amit Zur
 
 ;(function() {
+    var saveInterval, dirty;
+    var sid = new Uri(location).getQueryParamValue('sid');
+    var storageName = "hasadnaBudgetRequests" + sid;
+    var bakasha = localStorage.getItem(storageName);
+    bakasha = (bakasha && JSON.parse(bakasha)) || {};
+
     $(function() {
-        var sid = new Uri(location).getQueryParamValue('sid');
-        var storageName = "hasadnaBudgetRequests" + sid;
-        var bakasha = localStorage.getItem(storageName);
-        bakasha = (bakasha && JSON.parse(bakasha)) || {};
         fillFields(bakasha);
+
+        $("input, select, textarea").live("change", function() {
+            dirty = true;
+            toggleSaveButton(false);
+        });
+
+        toggleSaveButton(true);
 
         $(".pniya tr.pniya-row:last-child td:last-child input").live("keypress", function(e) {
             if (e.keyCode == 9 && !e.shiftKey) {
@@ -28,11 +37,37 @@
             }
         });
 
-        setInterval(function() {
+        restartSaveInterval();
+    });
+
+    KsafimApi.save = function() {
+        setBakashaInLocalStorage();
+        restartSaveInterval();
+    };
+
+    function setBakashaInLocalStorage() {
+        console.log("set bakasha in localStorage. dirty=" + dirty);
+        if (dirty) {
             bakasha = buildBakasha();
             localStorage.setItem(storageName, JSON.stringify(bakasha));
-        }, 1000);
-    });
+            toggleSaveButton(true);
+            dirty = false;
+        }
+    }
+
+    function restartSaveInterval() {
+        clearInterval(saveInterval);
+        saveInterval = setInterval(setBakashaInLocalStorage, 10000);
+    }
+
+    function toggleSaveButton(toDisabled) {
+        var $button = $(".save-button button");
+        if (!toDisabled) {
+            $button.removeAttr("disabled").removeClass("saved");
+        } else {
+            $button.attr("disabled", true).addClass("saved");
+        }
+    }
 
     function colorDiff($input) {
         if ($input.val() > 0)
@@ -45,6 +80,7 @@
         var bakasha = {
             recv_date: $("#bakasha_recv_date").val(),
             meeting_reason: $("#bakasha_meeting_reason").val(),
+            description: $("#bakasha_description").val(),
             pniyot: []
         };
         $(".pniya").each(function() {
@@ -71,6 +107,7 @@
     function fillFields(bakasha) {
         $("#bakasha_recv_date").val(bakasha.recv_date);
         $("#bakasha_meeting_reason").val(bakasha.meeting_reason);
+        $("#bakasha_description").val(bakasha.description);
         bakasha.pniyot && bakasha.pniyot.forEach(function(pniya) {
             var $pniya = KsafimApi.createPniya({ noAnimation: true });
             $(".mispar-pniya input", $pniya).val(pniya.mispar);
