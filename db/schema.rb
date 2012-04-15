@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120415164128) do
+ActiveRecord::Schema.define(:version => 20120415172201) do
 
   create_table "bakashas", :force => true do |t|
     t.date     "recv_date"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(:version => 20120415164128) do
     t.string   "file_name"
     t.integer  "scan_id"
     t.integer  "user_id"
+    t.text     "description"
   end
 
   create_table "haavaras", :force => true do |t|

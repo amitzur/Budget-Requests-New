@@ -29,6 +29,17 @@
               </div>
             </div>
           </div>
+          <div class='detail bakasha-description'>
+            <label for='bakasha_description'><%=t :bakasha_description %></label>
+            <%= f.text_area :description, :rows => 4 %>
+            <div class='question-mark'>
+              <div class='explanation'>
+                <div class='explanation-img'></div>
+                <div class='spinner'></div>
+              </div>
+            </div>
+          </div>
+
         </div>
         <%= f.submit :class => 'submit', :value => t(:hagesh) %>
 

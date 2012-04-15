@@ -297,6 +297,21 @@ header {
         float: right;
       }
     }
+
+    .bakasha-description {
+      textarea {
+        background-color: $light-orange;
+        border: 1px solid $turquise;
+        border-radius: 0.4em;
+        padding: 0.4em;
+        box-shadow: 1px 0 0.4em black inset;
+        float: right;
+        font-family: sans-serif;
+        font-size: 1em;
+        width: 93%;
+        color: $dark-turq;
+      }
+    }
   }
 
   .submit {

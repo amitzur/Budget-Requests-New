@@ -16,6 +16,10 @@
         <label><%=t :sibat %>:</label>
         <%= @bakasha.meeting_reason %>
       </div>
+      <div class='detail bakasha-description'>
+        <label><%=t :bakasha_description %></label>
+        <%= @bakasha.description %>
+      </div>
     </div>
     <div class='pniyot'>
       <% @bakasha.pniyas.each do |pniya| %>
