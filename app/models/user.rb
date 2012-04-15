@@ -27,7 +27,6 @@ class User < ActiveRecord::Base
     if user = User.where(:email => data.email).first
       user
     else # Create a user with a stub password.
-      puts "creating user with email: " + data.email
       User.create!(:email => data.email, :password => Devise.friendly_token[0,20], :name => data.name, :facebook_id => data.id)
     end
   end
