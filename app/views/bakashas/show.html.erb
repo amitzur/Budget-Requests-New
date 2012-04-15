@@ -57,7 +57,7 @@
               <% pniya.haavaras.each do |haavara| %>
                   <tr class="pniya-row">
                     <td><div><%= haavara.prat %></div></td>
-                    <td class="prat-name">&nbsp;</td>
+                    <td class="prat-name"><%= haavara.prat_name %></td>
                     <td><span>מ-</span><br><span>ל-</span></td>
                     <td><%= haavara.hotsaa_from %><br><%= haavara.hotsaa_to %></td>
                     <td><%= haavara.hotsaa_mut_from %><br><%= haavara.hotsaa_mut_to %></td>

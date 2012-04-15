@@ -86,7 +86,8 @@
                     if ($input.hasClass("diff"))
                         colorDiff($input);
                 }
-                $(".prat-name", $haavara).text(haavara.name);
+                $("span.prat-name-value", $haavara).text(haavara.name);
+		$("td.prat-name input", $haavara).val(haavara.name);
             });
         });
     }

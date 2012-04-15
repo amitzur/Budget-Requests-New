@@ -59,9 +59,10 @@
     </script>
 
     <script type="text/x-handlebar-template" id="pniya-row-template">
+
       <tr class="pniya-row">
         <td><input type="text" class="prat one" name='bakasha[pniyas_attributes][{{pniya_id}}][haavaras_attributes][{{id}}][prat]'/></td>
-        <td class="prat-name">&nbsp;</td>
+        <td class="prat-name"><span class='prat-name-value'>&nbsp;</span><input type="hidden" name='bakasha[pniyas_attributes][{{pniya_id}}][haavaras_attributes][{{id}}][prat_name]'/></td>
         <td><span>מ-</span><br><span>ל-</span></td>
         <td>
           <input type="text" name="bakasha[pniyas_attributes][{{pniya_id}}][haavaras_attributes][{{id}}][hotsaa_from]"/><input type="text" name="bakasha[pniyas_attributes][{{pniya_id}}][haavaras_attributes][{{id}}][hotsaa_to]"/>

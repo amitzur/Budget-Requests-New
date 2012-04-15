@@ -162,7 +162,8 @@
             if ($(this).val().trim() != "") {
                 var val = $(this).val()[0] == "0" && $(this).val()[1] == "0" ? $(this).val() : "00" + $(this).val();
                 $.get("/open-budget/" + val, function(data) {
-                    $pratName.text(data.haavara_name);
+		    $("span.prat-name-value", $pratName).text(data.haavara_name);
+	 	    $("input", $pratName).val(data.haavara_name);
                 });
             }
         });
