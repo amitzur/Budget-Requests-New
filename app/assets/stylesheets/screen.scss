@@ -629,6 +629,12 @@ ul.login {
     @include list;
 
     &.untagged {
+      .click-here {
+	display:none;
+	color: green;
+	font-weight: bold;
+	position: absolute;
+      }
       &.unlogged {
         li {
           a.logged {
@@ -643,8 +649,11 @@ ul.login {
         &:hover {
           li {
             background-color: grey;
+	    @include backgroundGradient;
             opacity: 0.8;
             cursor: pointer;
+	    color: transparent;
+	    border-color: transparent;
           }
         }
       }

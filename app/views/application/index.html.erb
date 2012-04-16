@@ -4,6 +4,7 @@
     <% @untagged.each do |scan| %>
          <li><a class="logged" href="/bakashas/new?sid=<%= scan.id %>"><%= scan.filename %></a><span class="unlogged"><%= scan.filename %></span></li>
     <% end %>
+    <span class='click-here'><%=t :click_here %></span>
     </ul>
 </div>
 <div class="scans-wrap">

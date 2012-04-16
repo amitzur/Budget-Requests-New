@@ -168,7 +168,14 @@
             }
         });
 
-        $("ul.scans.untagged.unlogged").live("click", doLogin);
+        $("ul.scans.untagged.unlogged").live("click", doLogin).bind("mouseover mouseout", function(e) {
+	  var $clickHere = $(".click-here", $(this));
+	  if (e.type == "mouseover") {
+	    $clickHere.css({ top: e.pageY - 20, left: e.pageX - 20 }).show(); 
+	  } else {
+	    $clickHere.hide();
+	  }
+	});
 
         $(".sign-in").bind("click", doLogin);
 
