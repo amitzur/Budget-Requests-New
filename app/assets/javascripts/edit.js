@@ -46,7 +46,6 @@
     };
 
     function setBakashaInLocalStorage() {
-        console.log("set bakasha in localStorage. dirty=" + dirty);
         if (dirty) {
             bakasha = buildBakasha();
             localStorage.setItem(storageName, JSON.stringify(bakasha));
