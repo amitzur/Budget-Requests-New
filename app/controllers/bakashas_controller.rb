@@ -1,5 +1,7 @@
 class BakashasController < ApplicationController
 
+  before_filter :authenticate_user!, :only => [:new, :create, :edit, :update, :destroy]
+
   # GET /bakashas
   # GET /bakashas.json
   def index

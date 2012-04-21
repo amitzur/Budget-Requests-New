@@ -3,9 +3,21 @@
 <% end %>
 
 <div class="show-actions">
-    <%= link_to t(:back), bakashas_path %>
+    <%= link_to t(:back), bakashas_path %> |
+    <% if @bakasha.finalized %>
+        <%=t :this_bakasha_is_finalized %>
+        <% if current_user and (current_user.id == @bakasha.user_id) %>
+            (<a href="#" class="mark-unfinalized"><%=t :mark_unfinalized %></a>)
+        <% end %>
+    <% else %>
+        <%=t :this_bakasha_is_unfinalized %>
+        <% if current_user and (current_user.id == @bakasha.user_id) %>
+            (<%= link_to t(:finish_editing), edit_bakasha_path %>)
+        <% end %>
+    <% end %>
 </div>
-<div class='bakasha'>
+<input class="bakasha-id" type="hidden" value="<%= @bakasha.id %>"/>
+<div class='bakasha <%= @bakasha.finalized ? "" : "unfinalized" %>'>
     <h3><%= t :bakasha %></h3>
     <div class='bakasha-details'>
       <div class='detail bakasha-date'>

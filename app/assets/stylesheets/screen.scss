@@ -280,6 +280,14 @@ header {
   box-sizing: border-box;
   -moz-box-sizing: border-box;
 
+  &.unfinalized {
+    background-color: rgba(255,0,0,0.6);
+
+    .pniya {
+      background-color: rgba(255,0,0,0.4);
+    }
+  }
+
   h3, h4 {
     text-decoration: underline;
   }

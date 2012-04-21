@@ -153,6 +153,19 @@
         $(".sign-out").bind("click", function() {
             KsafimApi.signOut();
         });
+
+        $(".mark-unfinalized").bind("click", function() {
+            var bakashaId = $(".bakasha-id").val();
+            $.ajax({
+                type: "put",
+                url: "/bakashas/" + bakashaId + ".json",
+                contentType: "application/json",
+                data: JSON.stringify({ bakasha: { finalized: false } }),
+                success: function(data, textStatus) {
+                    window.location.reload();
+                }
+            })
+        });
     }
 
     var pniyaNum;
