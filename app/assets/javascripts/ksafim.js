@@ -26,6 +26,9 @@
 
         enableUntaggedScans: function(toDisabled) {
             $("ul.scans.untagged")[toDisabled ? "addClass" : "removeClass"]("unlogged");
+	    if (!toDisabled) {
+	      $(".click-here, .click-here-connecting", $("ul.scans.untagged")).hide();
+	    }
         },
 
         getUserData: function() {
@@ -78,24 +81,6 @@
                 $("header .hello-user-actions").addClass("active");
                 $("header .hello-user-actions-guest").removeClass("active");
             }
-        },
-
-        addPniyaTable: function($pniya) {
-            $(Template.pniyaTable({})).appendTo($pniya);
-        },
-
-        addRow: function($pniya) {
-            var id = $pniya.attr("id").split("-")[1], row = $pniya.data("rows");
-            if (!row) {
-                row = 1;
-            } else {
-                row++;
-            }
-            $pniya.data("rows", row);
-            var $newRow = $(Template.row({ pniya_id : id, id: row }))
-            $newRow.appendTo($pniya.find(".pniya-table").children("tbody"));
-            $(".prat", $newRow).focus();
-            return $newRow;
         }
     };
 
@@ -109,11 +94,7 @@
     });
 
     function createTemplate() {
-        Template = {
-            pniya: Handlebars.compile($("#pniya-template").html()),
-            pniyaTable: Handlebars.compile($("#pniya-table-template").html()),
-            row: Handlebars.compile($("#pniya-row-template").html())
-        };
+        Handlebars.templates.pniya = Handlebars.compile($("#pniya-template").html());
     }
 
     function createWidgets() {
@@ -121,18 +102,6 @@
     }
 
     function createBindings() {
-
-        $(".add-row").live("click", function() {
-            KsafimApi.addRow($(this).closest(".pniya"));
-        });
-
-        $("#divider").bind("mousedown", function() {
-            console.log("mousedown");
-            $(document).bind("mousemove", resizeCol).bind("mouseup", function() {
-                $(document).unbind("mousemove", resizeCol).unbind("mouseup", arguments.callee);
-            });
-        });
-
         $(".start-filling").live("click", function(e) {
             var $this = $(this), $pniya = $this.closest(".pniya");
             var $input = $this.prev("input");
@@ -146,8 +115,8 @@
             id = Number(id);
 
             $input.bind("keypress mousedown", function() { return false; }).addClass("disabled");
-            KsafimApi.addPniyaTable($pniya);
-            KsafimApi.addRow($pniya);
+            var $pniyaTable = $("<div></div>").bakashaTable().appendTo($pniya);
+            $pniyaTable.bakashaTable("addRow");
             $this.remove();
             $(".enter-number", $pniya).remove();
             e.preventDefault();
@@ -155,27 +124,20 @@
 
         $("input").live("keypress", function(e) {
             if (e.keyCode == 13) e.preventDefault();
-        })
-
-        $("input.prat").live("change", function() {
-            var $pratName = $(this).closest("td").next(".prat-name");
-            if ($(this).val().trim() != "") {
-                var val = $(this).val()[0] == "0" && $(this).val()[1] == "0" ? $(this).val() : "00" + $(this).val();
-                $.get("/open-budget/" + val, function(data) {
-		    $("span.prat-name-value", $pratName).text(data.haavara_name);
-	 	    $("input", $pratName).val(data.haavara_name);
-                });
-            }
         });
 
-        $("ul.scans.untagged.unlogged").live("click", doLogin).bind("mouseover mouseout", function(e) {
-	  var $clickHere = $(".click-here", $(this));
-	  if (e.type == "mouseover") {
-	    $clickHere.css({ top: e.pageY - 20, left: e.pageX - 20 }).show(); 
-	  } else {
-	    $clickHere.hide();
-	  }
-	});
+        $("ul.scans.untagged.unlogged").live("click", function() {
+            doLogin();
+        }).bind("mouseover mouseout", function(e) {
+          var $clickHere = $(".click-here", $(this));
+          var $clickHereConnecting = $(".click-here-connecting", $(this));
+          if (e.type == "mouseover") {
+            $clickHere.css({ top: e.pageY - 20, left: e.pageX - 20 }).show();
+            $clickHereConnecting.css({ top: e.pageY - 20, left: e.pageX -20 });
+          } else {
+            $clickHere.hide();
+          }
+        });
 
         $(".sign-in").bind("click", doLogin);
 
@@ -184,13 +146,7 @@
         });
     }
 
-    var Template, pniyaNum;
-
-    function resizeCol(e) {
-        var distance = window.innerWidth - e.pageX;
-        $(".photo").css("width", distance);
-        $(".form-wrap").css("right", distance + 8);
-    }
+    var pniyaNum;
 
     function adjustPdfFrame() {
         var $frame = $(".file_frame");
@@ -200,8 +156,6 @@
         else
             $frame.css({ width: "0", display: "none", height: "0"});
     }
-
-
 
     function doLogin() {
         FB.getLoginStatus(function(response) {

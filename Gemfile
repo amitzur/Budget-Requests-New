@@ -49,3 +49,6 @@ gem 'omniauth-facebook'
 
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
+
+#i18n for javascript
+gem 'i18n-js'

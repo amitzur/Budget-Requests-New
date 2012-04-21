@@ -6,12 +6,17 @@
   <meta name="author" content="Amit Zur">
   <%= stylesheet_link_tag "screen", :media => "screen" %>
   <%= stylesheet_link_tag "ui-lightness/jquery-ui-1.8.18.custom.css", :media => "screen" %>
+  <%= javascript_include_tag "application" %>
   <%= javascript_include_tag "vendor/jquery-1.7.1.min.js" %>
   <%= javascript_include_tag "vendor/handlebars-1.0.0.beta.6.js" %>
   <%= javascript_include_tag "vendor/jquery-ui-1.8.18.custom.min.js" %>
   <%= javascript_include_tag "vendor/jquery.ui.datepicker-he.js" %>
   <%= javascript_include_tag "detect_pdf.js" %>
   <%= javascript_include_tag "ksafim.js" %>
+  <script>
+      I18n.defaultLocale = "<%= I18n.default_locale %>";
+      I18n.locale = "<%= I18n.locale %>";
+  </script>
   <%= yield :javascripts %>
 </head>
 <body dir='rtl'>

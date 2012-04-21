@@ -10,33 +10,13 @@
     $(function() {
         fillFields(bakasha);
 
-        $("input, select, textarea").live("change", function() {
+        // bind this when create pniya
+        $(".pniya-table").bind("change", function() {
             dirty = true;
             toggleSaveButton(false);
         });
 
         toggleSaveButton(true);
-
-        $(".pniya tr.pniya-row:last-child td:last-child input").live("keypress", function(e) {
-            if (e.keyCode == 9 && !e.shiftKey) {
-                KsafimApi.addRow($(this).closest(".pniya"));
-                e.preventDefault();
-            }
-        });
-
-        $(".pniya input.diff").live("change", function() {
-            colorDiff($(this));
-        });
-
-        $(".pniya-table input").live("change", function() {
-            var $this = $(this);
-            if (isNaN(Number($this.val()))) {
-                $this.addClass("invalid");
-            } else {
-                $this.removeClass("invalid");
-            }
-        });
-
         restartSaveInterval();
     });
 
@@ -68,13 +48,6 @@
         }
     }
 
-    function colorDiff($input) {
-        if ($input.val() > 0)
-            $input.addClass("positive").removeClass("negative");
-        else if ($input.val() < 0)
-            $input.addClass("negative").removeClass("positive");
-    }
-
     function buildBakasha() {
         var bakasha = {
             recv_date: $("#bakasha_recv_date").val(),
@@ -86,19 +59,9 @@
             var $pniya = $(this);
             var pniyaObj = {
                 mispar: $('.mispar-pniya input', $pniya).val(),
-                haavarot: []
+                haavarot: $(".pniya-table", $pniya).bakashaTable("toJSON")
             };
             bakasha.pniyot.push(pniyaObj);
-            $(".pniya-row", $pniya).each(function() {
-                var $haavara = $(this), haavara = {
-                    name: $(".prat-name", $haavara).text(),
-                    numbers: []
-                };
-                pniyaObj.haavarot.push(haavara);
-                $("input", $haavara).each(function() {
-                    haavara.numbers.push($(this).val());
-                });
-            });
         });
         return bakasha;
     }
@@ -111,20 +74,11 @@
             var $pniya = KsafimApi.createPniya({ noAnimation: true });
             $(".mispar-pniya input", $pniya).val(pniya.mispar);
             if (pniya.haavarot && pniya.haavarot.length) {
-                KsafimApi.addPniyaTable($pniya);
+                var $pniyaTable = $("<div></div>").bakashaTable().appendTo($pniya);
+                pniya.haavarot.forEach(function(haavara) {
+                    $pniyaTable.bakashaTable("addRow", { value: haavara });
+                });
             }
-            pniya.haavarot.forEach(function(haavara) {
-                var $haavara = KsafimApi.addRow($pniya);
-                var $inputs = $("input", $haavara);
-                for (var i= 0, ii=haavara.numbers.length; i < ii; i++) {
-                    var $input = $($inputs.get(i));
-                    $input.val(haavara.numbers[i]);
-                    if ($input.hasClass("diff"))
-                        colorDiff($input);
-                }
-                $("span.prat-name-value", $haavara).text(haavara.name);
-		$("td.prat-name input", $haavara).val(haavara.name);
-            });
         });
     }
 })();

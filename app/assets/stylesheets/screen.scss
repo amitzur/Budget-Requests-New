@@ -635,6 +635,10 @@ ul.login {
 	font-weight: bold;
 	position: absolute;
       }
+      .click-here-connecting {
+	display: none;
+	position: absolute;
+      }
       &.unlogged {
         li {
           a.logged {
