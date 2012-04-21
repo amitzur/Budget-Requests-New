@@ -630,14 +630,13 @@ ul.login {
 
     &.untagged {
       .click-here {
-	display:none;
-	color: green;
-	font-weight: bold;
-	position: absolute;
+        display: none;
+        color: green;
+        font-weight: bold;
       }
       .click-here-connecting {
-	display: none;
-	position: absolute;
+        display: none;
+        color: black;
       }
       &.unlogged {
         li {
@@ -647,17 +646,35 @@ ul.login {
 
           span.unlogged {
             display: block;
+            color: grey;
+          }
+
+          &:hover {
+            background-color: $banana;
+            opacity: 0.8;
+            cursor: pointer;
+            color: transparent;
+            border-color: transparent;
+
+            .click-here {
+              display: inline;
+            }
+
+            span.unlogged {
+              display: none;
+            }
           }
         }
 
-        &:hover {
-          li {
-            background-color: grey;
-	    @include backgroundGradient;
-            opacity: 0.8;
-            cursor: pointer;
-	    color: transparent;
-	    border-color: transparent;
+        &.connecting {
+          li:hover {
+            .click-here {
+              display: none;
+            }
+
+            .click-here-connecting {
+              display: inline;
+            }
           }
         }
       }

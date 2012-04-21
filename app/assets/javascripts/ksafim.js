@@ -25,10 +25,12 @@
         },
 
         enableUntaggedScans: function(toDisabled) {
-            $("ul.scans.untagged")[toDisabled ? "addClass" : "removeClass"]("unlogged");
-	    if (!toDisabled) {
-	      $(".click-here, .click-here-connecting", $("ul.scans.untagged")).hide();
-	    }
+            var $ul = $("ul.scans.untagged");
+            $ul[toDisabled ? "addClass" : "removeClass"]("unlogged");
+            if (!toDisabled) {
+                $(".click-here, .click-here-connecting").appendTo($ul);
+                $ul.removeClass("connecting");
+            }
         },
 
         getUserData: function() {
@@ -81,6 +83,25 @@
                 $("header .hello-user-actions").addClass("active");
                 $("header .hello-user-actions-guest").removeClass("active");
             }
+        },
+
+        doLogin: function() {
+            FB.getLoginStatus(function(response) {
+                if (response.status === 'connected') {
+                    KsafimApi.signIn();
+                } else {
+                    FB.login(function(response) {
+                        if (response.authResponse) {
+                            KsafimApi.signIn(function() {
+                                KsafimApi.changeUser(response.authResponse.name);
+                                KsafimApi.enableUntaggedScans();
+                            });
+                        } else {
+                            console.log('User cancelled login or did not fully authorize.');
+                        }
+                    }, { scope: "email" });
+                }
+            });
         }
     };
 
@@ -94,6 +115,7 @@
     });
 
     function createTemplate() {
+        Handlebars.templates || ( Handlebars.templates = {} );
         Handlebars.templates.pniya = Handlebars.compile($("#pniya-template").html());
     }
 
@@ -126,20 +148,7 @@
             if (e.keyCode == 13) e.preventDefault();
         });
 
-        $("ul.scans.untagged.unlogged").live("click", function() {
-            doLogin();
-        }).bind("mouseover mouseout", function(e) {
-          var $clickHere = $(".click-here", $(this));
-          var $clickHereConnecting = $(".click-here-connecting", $(this));
-          if (e.type == "mouseover") {
-            $clickHere.css({ top: e.pageY - 20, left: e.pageX - 20 }).show();
-            $clickHereConnecting.css({ top: e.pageY - 20, left: e.pageX -20 });
-          } else {
-            $clickHere.hide();
-          }
-        });
-
-        $(".sign-in").bind("click", doLogin);
+        $(".sign-in").bind("click", KsafimApi.doLogin);
 
         $(".sign-out").bind("click", function() {
             KsafimApi.signOut();
@@ -155,25 +164,6 @@
             $frame.css({ width: "100%", display: "block", height: "400px"});
         else
             $frame.css({ width: "0", display: "none", height: "0"});
-    }
-
-    function doLogin() {
-        FB.getLoginStatus(function(response) {
-            if (response.status === 'connected') {
-                KsafimApi.signIn();
-            } else {
-                FB.login(function(response) {
-                    if (response.authResponse) {
-                        KsafimApi.signIn(function() {
-                            KsafimApi.changeUser(response.authResponse.name);
-                            KsafimApi.enableUntaggedScans();
-                        });
-                    } else {
-                        console.log('User cancelled login or did not fully authorize.');
-                    }
-                }, { scope: "email" });
-            }
-        });
     }
 
 })(jQuery);

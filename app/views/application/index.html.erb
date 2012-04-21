@@ -1,3 +1,7 @@
+<% content_for :javascripts do %>
+    <%= javascript_include_tag "index.js" %>
+<% end %>
+
 <div class="scans-wrap">
     <h3><%=t :untagged_list %></h3>
     <ul class='scans untagged <% unless user_signed_in? %>unlogged<% end %>'>
