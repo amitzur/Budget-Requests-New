@@ -120,7 +120,7 @@
     }
 
     function createWidgets() {
-        $("#bakasha_recv_date").bind("keydown", function(e) { e.preventDefault(); }).datepicker();
+        $("#bakasha_recv_date").bind("keydown", function(e) { e.preventDefault(); }).datepicker({ defaultDate: new Date(2011, 0, 1) });
     }
 
     function createBindings() {
