@@ -11,6 +11,7 @@
   <div class='bakasha'>
     <h3><%= t :bakasha %></h3>
     <%= form_for(@bakasha) do |f| %>
+        <%= f.hidden_field :finalized, :value => false %>
         <%= f.hidden_field :scan_id, :value => @sid %>
         <div class='bakasha-details'>
           <div class='detail bakasha-date'>
@@ -55,6 +56,13 @@
   <% unless @file.nil? %>
     <iframe class="file_frame" src="<%= @file %>"></iframe>
   <% end %>
+</div>
+
+<div id="dialog-confirm" title="<%=t :did_you_finish %>">
+  <p>
+    <span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
+    <%=t :you_can_finish_later %>
+  </p>
 </div>
 
 <% content_for :templates do %>

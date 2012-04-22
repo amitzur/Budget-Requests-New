@@ -9,7 +9,7 @@
     window.KsafimApi = {
         createPniya: function(opts) {
             opts || (opts = {});
-            var $pniya = $(Template.pniya({ id: pniyaNum++ }));
+            var $pniya = $(Handlebars.templates.pniya({ id: pniyaNum++ }));
             $(".pniyot").append($pniya);
             if (opts.noAnimation) return $pniya;
             $pniya.hide();

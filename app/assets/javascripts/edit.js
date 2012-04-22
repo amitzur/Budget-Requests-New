@@ -16,6 +16,35 @@
             toggleSaveButton(false);
         });
 
+        $(".submit").bind("click", function(e) {
+            e.preventDefault();
+            $("#dialog-confirm").dialog('open');
+        });
+
+        $("#dialog-confirm").dialog({
+            resizable: false,
+            width: 400,
+            modal: true,
+            autoOpen: false,
+            dialogClass: "dialog-submit-bakasha",
+            buttons: {
+                "כן": function() {
+                    $("input#bakasha_finalized").val(true);
+                    $( this ).dialog( "close" );
+                    $("form#new_bakasha").submit();
+                },
+                "לא": function() {
+                    $("input#bakasha_finalized").val(false);
+                    $( this ).dialog( "close" );
+                    $("form#new_bakasha").submit();
+                },
+                "בטל": function() {
+                    $("input#bakasha_finalized").val(false);
+                    $( this ).dialog( "close" );
+                }
+            }
+        });
+
         toggleSaveButton(true);
         restartSaveInterval();
     });

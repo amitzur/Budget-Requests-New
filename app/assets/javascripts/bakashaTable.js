@@ -100,8 +100,10 @@
     };
 
     var rows;
-    Handlebars.templates.row = Handlebars.compile($("#pniya-row-template").html());
-    Handlebars.templates.pniyaTable = Handlebars.compile($("#pniya-table-template").html());
+    $(function() {
+        Handlebars.templates.row = Handlebars.compile($("#pniya-row-template").html());
+        Handlebars.templates.pniyaTable = Handlebars.compile($("#pniya-table-template").html());
+    });
 
     function colorDiff($input) {
         if ($input.val() > 0)
