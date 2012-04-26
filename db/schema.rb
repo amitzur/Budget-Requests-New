@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120421071313) do
+ActiveRecord::Schema.define(:version => 20120426213911) do
 
   create_table "bakashas", :force => true do |t|
     t.date     "recv_date"
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(:version => 20120421071313) do
     t.integer  "user_id"
     t.text     "description"
     t.boolean  "finalized"
+    t.boolean  "reserve_usage"
   end
 
   create_table "haavaras", :force => true do |t|

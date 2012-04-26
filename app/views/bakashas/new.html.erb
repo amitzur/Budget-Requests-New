@@ -44,7 +44,10 @@
               </div>
             </div>
           </div>
-
+          <div class='detail bakasha-reserve-usage'>
+            <%= f.check_box :reserve_usage %>
+            <span><%=t :bakasha_is_using_reserve %></span>
+          </div>
         </div>
         <%= f.submit :class => 'submit', :value => t(:hagesh) %>
 

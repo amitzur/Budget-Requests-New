@@ -36,6 +36,15 @@
         <label><%=t :bakasha_description %></label>
         <%= @bakasha.description %>
       </div>
+      <div class="detail bakasha-reserve-usage">
+        <label>
+            <% if @bakasha.reserve_usage %>
+                <%=t :bakasha_is_using_reserve %>
+            <% else %>
+              <%=t :bakasha_is_not_using_reserve %>
+            <% end %>
+        </label>
+      </div>
     </div>
     <div class='pniyot'>
       <% @bakasha.pniyas.each do |pniya| %>
