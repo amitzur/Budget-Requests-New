@@ -1,3 +1,7 @@
+<% content_for :javascripts do %>
+    <%= javascript_include_tag "show.js" %>
+<% end %>
+
 <% if notice %>
     <p class="notice"><%=t :received_bakasha %></p>
 <% end %>
@@ -35,7 +39,7 @@
     </div>
     <div class='pniyot'>
       <% @bakasha.pniyas.each do |pniya| %>
-          <div class='pniya' id='pniya-<%= pniya.mispar %>'>
+          <div class='pniya show' id='pniya-<%= pniya.mispar %>'>
             <h4><%=t :pniya %></h4>
 
             <div class='detail mispar-pniya'>
@@ -73,16 +77,16 @@
               <% pniya.haavaras.each do |haavara| %>
                   <tr class="pniya-row">
                     <td><div><%= haavara.prat %></div></td>
-                    <td class="prat-name"><%= haavara.prat_name %></td>
-                    <td><span>מ-</span><br><span>ל-</span></td>
-                    <td><%= haavara.hotsaa_from %><br><%= haavara.hotsaa_to %></td>
-                    <td><%= haavara.hotsaa_mut_from %><br><%= haavara.hotsaa_mut_to %></td>
-                    <td><%= haavara.harshaa_from %><br><%= haavara.harshaa_to %></td>
-                    <td><%= haavara.ska_from %><br><%= haavara.ska_to %></td>
-                    <td><%= haavara.diff_hotsaa %></td>
-                    <td><%= haavara.diff_hotsaa_mut %></td>
-                    <td><%= haavara.diff_harshaa %></td>
-                    <td><%= haavara.diff_ska %></td>
+                    <td class="prat-name"><div><%= haavara.prat_name %></div></td>
+                    <td><div><span>מ-</span><br><span>ל-</span></div></td>
+                    <td><div class="money"><%= haavara.hotsaa_from %>&nbsp;</div><div class="money"><%= haavara.hotsaa_to %>&nbsp;</div></td>
+                    <td><div class="money"><%= haavara.hotsaa_mut_from %>&nbsp;</div><div class="money"><%= haavara.hotsaa_mut_to %>&nbsp;</div></td>
+                    <td><div class="money"><%= haavara.harshaa_from %>&nbsp;</div><div class="money"><%= haavara.harshaa_to %>&nbsp;</div></td>
+                    <td><div class="money"><%= haavara.ska_from %>&nbsp;</div><div class="money"><%= haavara.ska_to %>&nbsp;</div></td>
+                    <td><div class="diff money"><%= haavara.diff_hotsaa %>&nbsp;</div></td>
+                    <td><div class="diff money"><%= haavara.diff_hotsaa_mut %>&nbsp;</div></td>
+                    <td><div class="diff money"><%= haavara.diff_harshaa %>&nbsp;</div></td>
+                    <td><div class="diff money"><%= haavara.diff_ska %>&nbsp;</div></td>
                   </tr>
               <% end %>
               </tbody>
