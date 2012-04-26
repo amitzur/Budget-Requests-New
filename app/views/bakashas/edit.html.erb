@@ -1,8 +1,16 @@
+<% content_for :javascripts do %>
+    <%= javascript_include_tag "vendor/jsuri-1.1.1.min.js" %>
+    <%= javascript_include_tag "bakashaTable.js" %>
+    <%= javascript_include_tag "edit.js" %>
+<% end %>
+
+
 <div class='form'>
   <div class='bakasha'>
     <h3><%= t :bakasha %></h3>
     <%= form_for(@bakasha) do |f| %>
-        <%= f.hidden_field :scan_id, :value => @sid %>
+        <%= f.hidden_field :finalized, :value => false %>
+        <%= f.hidden_field :scan_id %>
         <div class='bakasha-details'>
           <div class='detail bakasha-date'>
             <label for='bakasha_recv_date'><%=t :nitkabel %>:</label>
@@ -16,7 +24,7 @@
           </div>
           <div class='detail bakasha-meeting-reason'>
             <label for='bakasha_meeting_reason'><%=t :sibat %>:</label>
-            <%= f.select :meeting_reason, [[t(:reason_taksiv), t(:reason_taksiv)], [t(:reason_seifim), t(:reason_seifim)], [t(:reason_shimush), t(:reason_shimush)], [t(:reason_reserve), t(:reason_reserve)]], :class => 'bakasha-meeting-reason' %>
+            <%= f.select :meeting_reason, [[t(:reason_taksiv), t(:reason_taksiv)], [t(:reason_seifim), t(:reason_seifim)], [t(:reason_shimush), t(:reason_shimush)], [t(:reason_reserve), t(:reason_reserve)], [t(:reason_heskem), t(:reason_heskem)]], :class => 'bakasha-meeting-reason' %>
             <div class='question-mark'>
               <div class='explanation'>
                 <div class='explanation-img'></div>
@@ -24,19 +32,32 @@
               </div>
             </div>
           </div>
+          <div class='detail bakasha-description'>
+            <label for='bakasha_description'><%=t :bakasha_description %></label>
+            <%= f.text_area :description, :rows => 4 %>
+            <div class='question-mark'>
+              <div class='explanation'>
+                <div class='explanation-img'></div>
+                <div class='spinner'></div>
+              </div>
+            </div>
+          </div>
+          <div class='detail bakasha-reserve-usage'>
+            <%= f.check_box :reserve_usage %>
+            <span><%=t :bakasha_is_using_reserve %></span>
+          </div>
         </div>
         <%= f.submit :class => 'submit', :value => t(:update_bakasha) %>
 
         <div class='pniyot'>
           <% @bakasha.pniyas.each do |pniya| %>
               <div class='pniya' id='pniya-<%= pniya.mispar %>'>
-                <h4>פנייה</h4>
+                <h4><%=t :pniya %></h4>
 
                 <div class='detail mispar-pniya'>
                   <label for="mispar-pniya-<%= pniya.mispar %>"><%=t :mispar_pniya %>:</label>
-                  <input type="hidden" id='mispar-pniya-<%= pniya.mispar %>' name='bakasha[pniyas_attributes][<%= pniya.mispar %>][mispar]' value="<%= pniya.mispar %>"/>
-                  <%= pniya.mispar %>
-              </div>
+                  <input type="text" id='mispar-pniya-<%= pniya.mispar %>' name='bakasha[pniyas_attributes][<%= pniya.mispar %>][mispar]' value="<%= pniya.mispar %>"/>
+                </div>
 
                 <table cellspacing=0 class='pniya-table' width="100%" id="pniya-table-<%= pniya.mispar %>">
                   <thead>
@@ -67,29 +88,46 @@
                   <tbody>
                   <% pniya.haavaras.each do |haavara| %>
                       <tr class="pniya-row">
-                        <td><input type="text" class="prat" name='bakasha[pniyas_attributes][<%= pniya.mispar %>][haavaras_attributes][{{id}}][prat]' value='<%= haavara.prat %>'/></td>
-                        <td class="prat-name">&nbsp;</td>
-                        <td><span>מ-</span><br><span>ל-</span></td>
                         <td>
-                          <input type="text" name="bakasha[pniyas_attributes][<%= pniya.mispar %>][haavaras_attributes][{{id}}][hotsaa_from]" value='<%= haavara.hotsaa_from %>'/><input type="text" name="bakasha[pniyas_attributes][<%= pniya.mispar %>][haavaras_attributes][{{id}}][hotsaa_to]" value='<%= haavara.hotsaa_to %>'/>
+                          <input type="text" class="prat one" name='bakasha[pniyas_attributes][<%= pniya.mispar %>][haavaras_attributes][{{id}}][prat]' value='<%= haavara.prat %>'/>
                         </td>
-                        <td>
-                          <input type="text" name="bakasha[pniyas_attributes][<%= pniya.mispar %>][haavaras_attributes][{{id}}][hotsaa_mut_from]" value='<%= haavara.hotsaa_mut_from %>'/><input type="text" name="bakasha[pniyas_attributes][<%= pniya.mispar %>][haavaras_attributes][{{id}}][hotsaa_mut_to]" value='<%= haavara.hotsaa_mut_to %>'/>
+                        <td class="prat-name">
+                          <span class='prat-name-value'>&nbsp;</span>
+                          <input type="hidden" name='bakasha[pniyas_attributes][<%= pniya.mispar %>][haavaras_attributes][{{id}}][prat_name]' value="<%= haavara.prat_name %>"/>
                         </td>
                         <td>
-                          <input type="text" name="bakasha[pniyas_attributes][<%= pniya.mispar %>][haavaras_attributes][{{id}}][harshaa_from]" value='<%= haavara.harshaa_from %>'/><input type="text" name="bakasha[pniyas_attributes][<%= pniya.mispar %>][haavaras_attributes][{{id}}][harshaa_to]" value='<%= haavara.harshaa_to %>'/>
+                          <span>מ-</span>
+                          <br>
+                          <span>ל-</span>
                         </td>
                         <td>
-                          <input type="text" name="bakasha[pniyas_attributes][<%= pniya.mispar %>][haavaras_attributes][{{id}}][ska_from]" value='<%= haavara.ska_from %>'/><input type="text" name="bakasha[pniyas_attributes][<%= pniya.mispar %>][haavaras_attributes][{{id}}][ska_to]" value='<%= haavara.ska_to %>'/>
-                        </td>
-                        <td><input type="text" name="bakasha[pniyas_attributes][<%= pniya.mispar %>][haavaras_attributes][{{id}}][diff_hotsaa]" value='<%= haavara.diff_hotsaa %>'/>
+                          <input class="money" type="text" name="bakasha[pniyas_attributes][<%= pniya.mispar %>][haavaras_attributes][{{id}}][hotsaa_from]" value='<%= haavara.hotsaa_from %>'/>
+                          <input class="money" type="text" name="bakasha[pniyas_attributes][<%= pniya.mispar %>][haavaras_attributes][{{id}}][hotsaa_to]" value='<%= haavara.hotsaa_to %>'/>
                         </td>
                         <td>
-                          <input type="text" name="bakasha[pniyas_attributes][<%= pniya.mispar %>][haavaras_attributes][{{id}}][diff_hotsaa_mut]" value='<%= haavara.diff_hotsaa_mut %>'/>
+                          <input class="money" type="text" name="bakasha[pniyas_attributes][<%= pniya.mispar %>][haavaras_attributes][{{id}}][hotsaa_mut_from]" value='<%= haavara.hotsaa_mut_from %>'/>
+                          <input class="money" type="text" name="bakasha[pniyas_attributes][<%= pniya.mispar %>][haavaras_attributes][{{id}}][hotsaa_mut_to]" value='<%= haavara.hotsaa_mut_to %>'/>
                         </td>
-                        <td><input type="text" name="bakasha[pniyas_attributes][<%= pniya.mispar %>][haavaras_attributes][{{id}}][diff_harshaa]" value='<%= haavara.diff_harshaa %>'/>
+                        <td>
+                          <input class="money" type="text" name="bakasha[pniyas_attributes][<%= pniya.mispar %>][haavaras_attributes][{{id}}][harshaa_from]" value='<%= haavara.harshaa_from %>'/>
+                          <input class="money" type="text" name="bakasha[pniyas_attributes][<%= pniya.mispar %>][haavaras_attributes][{{id}}][harshaa_to]" value='<%= haavara.harshaa_to %>'/>
                         </td>
-                        <td><input type="text" name="bakasha[pniyas_attributes][<%= pniya.mispar %>][haavaras_attributes][{{id}}][diff_ska]" value='<%= haavara.diff_ska %>'/></td>
+                        <td>
+                          <input class="money" type="text" name="bakasha[pniyas_attributes][<%= pniya.mispar %>][haavaras_attributes][{{id}}][ska_from]" value='<%= haavara.ska_from %>'/>
+                          <input class="money"type="text" name="bakasha[pniyas_attributes][<%= pniya.mispar %>][haavaras_attributes][{{id}}][ska_to]" value='<%= haavara.ska_to %>'/>
+                        </td>
+                        <td>
+                          <input class="diff one money" type="text" name="bakasha[pniyas_attributes][<%= pniya.mispar %>][haavaras_attributes][{{id}}][diff_hotsaa]" value='<%= haavara.diff_hotsaa %>'/>
+                        </td>
+                        <td>
+                          <input class="diff one money" type="text" name="bakasha[pniyas_attributes][<%= pniya.mispar %>][haavaras_attributes][{{id}}][diff_hotsaa_mut]" value='<%= haavara.diff_hotsaa_mut %>'/>
+                        </td>
+                        <td>
+                          <input class="diff one money" type="text" name="bakasha[pniyas_attributes][<%= pniya.mispar %>][haavaras_attributes][{{id}}][diff_harshaa]" value='<%= haavara.diff_harshaa %>'/>
+                        </td>
+                        <td>
+                          <input class="diff one money" type="text" name="bakasha[pniyas_attributes][<%= pniya.mispar %>][haavaras_attributes][{{id}}][diff_ska]" value='<%= haavara.diff_ska %>'/>
+                        </td>
                       </tr>
                   <% end %>
                   </tbody>

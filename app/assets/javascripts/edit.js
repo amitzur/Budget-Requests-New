@@ -123,11 +123,11 @@
         $("#bakasha_recv_date").val(bakasha.recv_date);
         $("#bakasha_meeting_reason").val(bakasha.meeting_reason);
         $("#bakasha_description").val(bakasha.description);
-        bakasha.pniyot && bakasha.pniyot.forEach(function(pniya) {
+        bakasha.pniyot && bakasha.pniyot.forEach(function(pniya, index) {
             var $pniya = KsafimApi.createPniya({ noAnimation: true });
             $(".mispar-pniya input", $pniya).val(pniya.mispar);
             if (pniya.haavarot && pniya.haavarot.length) {
-                var $pniyaTable = $("<div></div>").bakashaTable().appendTo($pniya);
+                var $pniyaTable = $("<div></div>").bakashaTable({ id: index }).appendTo($pniya);
                 pniya.haavarot.forEach(function(haavara) {
                     $pniyaTable.bakashaTable("addRow", { value: haavara });
                 });

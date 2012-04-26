@@ -1,0 +1,116 @@
+<% content_for :templates do %>
+    <script type="text/x-handlebar-template" id="detail-template">
+      <div class='detail'>
+        <label for="{{name}}">{{label}}</label>
+        <input type="text" value="{{value}}" id='{{name}}'/>
+      </div>
+    </script>
+
+    <script type="text/x-handlebar-template" id="haavara-template1">
+      <div class='haavara' id='haavara-{{id}}'>
+        {{#details haavaraDetails}}
+
+        {{/details}}
+      </div>
+    </script>
+
+    <script type="text/x-handlebar-template" id="pniya-row-template">
+
+      <tr class="pniya-row">
+        <td>
+          <input type="text" class="prat one" name='bakasha[pniyas_attributes][{{pniya_id}}][haavaras_attributes][{{id}}][prat]'/>
+        </td>
+        <td class="prat-name">
+          <span class='prat-name-value'>&nbsp;</span>
+          <input type="hidden" name='bakasha[pniyas_attributes][{{pniya_id}}][haavaras_attributes][{{id}}][prat_name]'/>
+        </td>
+        <td>
+          <span>מ-</span>
+          <br>
+          <span>ל-</span>
+        </td>
+        <td>
+          <input class="money" type="text" name="bakasha[pniyas_attributes][{{pniya_id}}][haavaras_attributes][{{id}}][hotsaa_from]"/>
+          <input class="money" type="text" name="bakasha[pniyas_attributes][{{pniya_id}}][haavaras_attributes][{{id}}][hotsaa_to]"/>
+        </td>
+        <td>
+          <input class="money" type="text" name="bakasha[pniyas_attributes][{{pniya_id}}][haavaras_attributes][{{id}}][hotsaa_mut_from]"/>
+          <input class="money" type="text" name="bakasha[pniyas_attributes][{{pniya_id}}][haavaras_attributes][{{id}}][hotsaa_mut_to]"/>
+        </td>
+        <td>
+          <input class="money" type="text" name="bakasha[pniyas_attributes][{{pniya_id}}][haavaras_attributes][{{id}}][harshaa_from]"/>
+          <input class="money" type="text" name="bakasha[pniyas_attributes][{{pniya_id}}][haavaras_attributes][{{id}}][harshaa_to]"/>
+        </td>
+        <td>
+          <input class="money" type="text" name="bakasha[pniyas_attributes][{{pniya_id}}][haavaras_attributes][{{id}}][ska_from]"/>
+          <input class="money" type="text" name="bakasha[pniyas_attributes][{{pniya_id}}][haavaras_attributes][{{id}}][ska_to]"/>
+        </td>
+        <td>
+          <input class="diff one money" type="text" name="bakasha[pniyas_attributes][{{pniya_id}}][haavaras_attributes][{{id}}][diff_hotsaa]"/>
+        </td>
+        <td>
+          <input class="diff one money" type="text" name="bakasha[pniyas_attributes][{{pniya_id}}][haavaras_attributes][{{id}}][diff_hotsaa_mut]"/>
+        </td>
+        <td>
+          <input class="diff one money" type="text" name="bakasha[pniyas_attributes][{{pniya_id}}][haavaras_attributes][{{id}}][diff_harshaa]"/>
+        </td>
+        <td>
+          <input class="diff one money" type="text" name="bakasha[pniyas_attributes][{{pniya_id}}][haavaras_attributes][{{id}}][diff_ska]"/>
+        </td>
+      </tr>
+    </script>
+
+    <script type="text/x-handlebar-template" id="pniya-template">
+      <div class='pniya' id='pniya-{{id}}'>
+        <h4><%=t :pniya %></h4>
+
+        <div class='detail mispar-pniya'>
+          <label for="mispar-pniya-{{id}}"><%=t :mispar_pniya %>:</label>
+          <input type="text" id='mispar-pniya-{{id}}' name='bakasha[pniyas_attributes][{{id}}][mispar]'/>
+          <button class='start-filling'><%=t :start_filling %></button>
+          <span class='enter-number'><%=t :enter_number %></span>
+
+          <div class='question-mark'>
+            <div class='explanation'>
+              <div class='explanation-img'></div>
+              <div class='spinner'></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </script>
+
+    <script type="text/x-handlebar-template" id="pniya-table-template">
+      <table cellspacing=0 class='pniya-table' width="100%">
+        <thead>
+        <tr>
+          <th>&nbsp;</th>
+          <th>&nbsp;</th>
+          <th>&nbsp;</th>
+          <th>&nbsp;</th>
+          <th>&nbsp;</th>
+          <th>&nbsp;</th>
+          <th>&nbsp;</th>
+          <th colspan=4><%=t :changes_amounts %>
+        </tr>
+        <tr>
+          <th><%=t :mispar_prat %></th>
+          <th><%=t :name_prat %></th>
+          <th>&nbsp;</th>
+          <th><%=t :hotsaa %></th>
+          <th><%=t :hotsaa_mut %></th>
+          <th><%=t :harshaa %></th>
+          <th><%=t :ska %></th>
+          <th><%=t :hotsaa %></th>
+          <th><%=t :hotsaa_mut %></th>
+          <th><%=t :harshaa %></th>
+          <th><%=t :ska_abbr %></th>
+        </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+      </table>
+      <div class='add-row'>+</div>
+    </script>
+<% end %>

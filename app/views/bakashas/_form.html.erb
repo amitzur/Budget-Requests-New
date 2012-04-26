@@ -1,35 +1,76 @@
-<%= form_for(@bakasha) do |f| %>
-    <div class='bakasha-details'>
-        <div class='detail bakasha-date'>
-            <label for='bakasha_recv_date'>נתקבל בועדת הכספים:</label>
-            <!--<input type='text' id='bakasha-date' class='bakasha-date' name='bakasha[recv_date]'/>-->
+<% content_for :javascripts do %>
+    <%= javascript_include_tag "vendor/jsuri-1.1.1.min.js" %>
+    <%= javascript_include_tag "bakashaTable.js" %>
+    <%= javascript_include_tag "edit.js" %>
+<% end %>
+
+<div class='save-button'><button onclick='KsafimApi.save();'><span class='save-now'><%=t :save_now %></span><span class="saved"><%=t :saved %></span></button></div>
+
+
+<div class='form'>
+  <div class='bakasha'>
+    <h3><%= t :bakasha %></h3>
+    <%= form_for(@bakasha) do |f| %>
+        <%= f.hidden_field :finalized, :value => false %>
+        <%= f.hidden_field :scan_id, :value => @sid %>
+        <div class='bakasha-details'>
+          <div class='detail bakasha-date'>
+            <label for='bakasha_recv_date'><%=t :nitkabel %>:</label>
             <%= f.text_field :recv_date, :class => 'bakasha-date' %>
             <div class='question-mark'>
-                <div class='explanation'>
-                    <div class='explanation-img'></div>
-                    <div class='spinner'></div>
-                </div>
+              <div class='explanation'>
+                <div class='explanation-img'></div>
+                <div class='spinner'></div>
+              </div>
             </div>
-        </div>
-        <div class='detail bakasha-meeting-reason'>
-            <label for='bakasha_meeting_reason'>סיבת הבקשה:</label>
-            <%= f.select :meeting_reason, [ ['החלטת הממשלה', 'החלטת הממשלה'], ['עודפים תקציביים', 'עודפים תקציביים']], :class => 'bakasha-meeting-reason' %>
-            <!--<select id='bakasha-meeting-reason' class='bakasha-meeting-reason' name='bakasha[meeting_reason]'>
-                <option>החלטת ממשלה</option>
-                <option>עודפים תקציביים</option>
-            </select>-->
+          </div>
+          <div class='detail bakasha-meeting-reason'>
+            <label for='bakasha_meeting_reason'><%=t :sibat %>:</label>
+            <%= f.select :meeting_reason, [[t(:reason_taksiv), t(:reason_taksiv)], [t(:reason_seifim), t(:reason_seifim)], [t(:reason_shimush), t(:reason_shimush)], [t(:reason_reserve), t(:reason_reserve)], [t(:reason_heskem), t(:reason_heskem)]], :class => 'bakasha-meeting-reason' %>
             <div class='question-mark'>
-                <div class='explanation'>
-                    <div class='explanation-img'></div>
-                    <div class='spinner'></div>
-                </div>
+              <div class='explanation'>
+                <div class='explanation-img'></div>
+                <div class='spinner'></div>
+              </div>
             </div>
+          </div>
+          <div class='detail bakasha-description'>
+            <label for='bakasha_description'><%=t :bakasha_description %></label>
+            <%= f.text_area :description, :rows => 4 %>
+            <div class='question-mark'>
+              <div class='explanation'>
+                <div class='explanation-img'></div>
+                <div class='spinner'></div>
+              </div>
+            </div>
+          </div>
+          <div class='detail bakasha-reserve-usage'>
+            <%= f.check_box :reserve_usage %>
+            <span><%=t :bakasha_is_using_reserve %></span>
+          </div>
         </div>
-    </div>
-    <input class='submit' type='submit' name='commit' value='הגש בקשה'/>
-    <div class='pniyot'>
-        <%= f.fields_for :pniyas do |p| %>
-            <%= render 'pniya_edit', :pniya => p %>
-        <% end %>
-    </div>
-<% end %>
+        <%= f.submit :class => 'submit', :value => t(:hagesh) %>
+
+        <div class='pniyot'>
+        </div>
+    <% end %>
+    <%= link_to_function '+', 'KsafimApi.createPniya();', :class => 'add-pniya', :title => t(:hosef), :id => 'add-pniya' %>
+  </div>
+  <% unless @file.nil? %>
+      <iframe class="file_frame" src="<%= @file %>"></iframe>
+  <% end %>
+</div>
+
+<div id="dialog-confirm" title="<%=t :did_you_finish %>">
+  <p>
+    <span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
+    <%=t :you_can_finish_later %>
+  </p>
+</div>
+
+<div id="dialog-invalid" title="<%=t :bakasha_is_invalid %>">
+  <p>
+    <span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
+    <%=t :your_bakasha_is_invalid %>
+  </p>
+</div>

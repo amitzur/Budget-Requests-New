@@ -14,14 +14,11 @@
         return this;
     };
 
-    var settings = {
-        id: 0
-    };
-
     var methods = {
         init: function(options) {
-            settings = $.extend(settings, options);
+            options || (options = {});
             var _this = this, $table = $(Handlebars.templates.pniyaTable({}));
+            _this.data("id", options.id || 0);
 
             this.append($table).addClass("pniya-table-wrap");
 
@@ -77,7 +74,8 @@
             else
                 rows++;
             this.data("rows", rows);
-            var $newRow = $(Handlebars.templates.row({ pniya_id : settings.id, id: rows })).appendTo(this.find("tbody"));
+            var pniya_id = this.data("id");
+            var $newRow = $(Handlebars.templates.row({ pniya_id : pniya_id, id: rows })).appendTo(this.find("tbody"));
             $(".prat", $newRow).focus();
             if (options.value) {
                 var $inputs = $("input", $newRow);
@@ -133,7 +131,7 @@
     });
 
     function colorDiff($input) {
-        var val = Number($input.val());
+        var val = Number($input.val().replace(/,/g, ""));
         if (val == 0 || isNaN(val))
             $input.removeClass("positive negative");
         else if (val > 0)

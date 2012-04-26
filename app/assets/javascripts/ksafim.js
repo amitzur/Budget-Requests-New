@@ -137,7 +137,7 @@
             id = Number(id);
 
             $input.bind("keypress mousedown", function() { return false; }).addClass("disabled");
-            var $pniyaTable = $("<div></div>").bakashaTable().appendTo($pniya);
+            var $pniyaTable = $("<div></div>").bakashaTable({ id: pniyaNum }).appendTo($pniya);
             $pniyaTable.bakashaTable("addRow");
             $this.remove();
             $(".enter-number", $pniya).remove();
