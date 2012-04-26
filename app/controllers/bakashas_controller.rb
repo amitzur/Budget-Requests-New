@@ -19,6 +19,10 @@ class BakashasController < ApplicationController
   # GET /bakashas/1.json
   def show
     @bakasha = Bakasha.find(params[:id])
+    scan = Scan.find_by_id(@bakasha.scan_id)
+    unless scan.nil?
+      @file = 'https://s3-eu-west-1.amazonaws.com/hasadna-budget-requests/' + scan[:filename].gsub(" ", "+")
+    end
 
     respond_to do |format|
       format.html # show.html.erb

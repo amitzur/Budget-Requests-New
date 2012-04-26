@@ -95,3 +95,7 @@
       <% end %>
     </div>
 </div>
+
+<% unless @file.nil? %>
+    <iframe class="file_frame" src="<%= @file %>"></iframe>
+<% end %>
