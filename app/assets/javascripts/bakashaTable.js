@@ -41,11 +41,13 @@
             });
 
             $table.delegate("input", "change", function() {
-                var $this = $(this);
-                if (isNaN(Number($this.val()))) {
+                var $this = $(this), val = $this.val();
+                if (isNaN(Number(val)) && !isValidNumber(val)) {
                     $this.addClass("invalid");
                 } else {
                     $this.removeClass("invalid");
+                    if (!isNaN(Number(val)))
+                        $this.val(addCommasToNumber(val));
                 }
             });
 
@@ -104,6 +106,24 @@
                 });
             });
             return ret;
+        },
+
+        validate: function() {
+            var isValid = true;
+            $("input.money", this).each(function() {
+                var $input = $(this), val = $input.val();
+                if (!isValidNumber(val)) {
+                    $input.addClass("invalid");
+                    isValid = false;
+                }
+            });
+            return isValid;
+        },
+
+        normalizeNumbers: function() {
+            $("input.money", this).each(function() {
+                $(this).val($(this).val().replace(/,/g, ""));
+            });
         }
     };
 
@@ -121,5 +141,16 @@
         else if (val < 0)
             $input.addClass("negative").removeClass("positive");
     }
+
+    function isValidNumber(str) {
+        return str == "" || validNumberRe.test(str);
+    }
+
+    function addCommasToNumber(str) {
+        return str.replace(addCommasRe, ",");
+    }
+
+    var validNumberRe = /^-?\d{1,3}(,\d{3})*(\.\d+)?$/;
+    var addCommasRe = /\B(?=(?:\d{3})+(?!\d))/g;
 
 })(jQuery);

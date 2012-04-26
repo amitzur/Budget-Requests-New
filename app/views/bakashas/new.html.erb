@@ -65,6 +65,13 @@
   </p>
 </div>
 
+<div id="dialog-invalid" title="<%=t :bakasha_is_invalid %>">
+  <p>
+    <span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
+    <%=t :your_bakasha_is_invalid %>
+  </p>
+</div>
+
 <% content_for :templates do %>
     <script type="text/x-handlebar-template" id="detail-template">
       <div class='detail'>
@@ -84,29 +91,46 @@
     <script type="text/x-handlebar-template" id="pniya-row-template">
 
       <tr class="pniya-row">
-        <td><input type="text" class="prat one" name='bakasha[pniyas_attributes][{{pniya_id}}][haavaras_attributes][{{id}}][prat]'/></td>
-        <td class="prat-name"><span class='prat-name-value'>&nbsp;</span><input type="hidden" name='bakasha[pniyas_attributes][{{pniya_id}}][haavaras_attributes][{{id}}][prat_name]'/></td>
-        <td><span>מ-</span><br><span>ל-</span></td>
         <td>
-          <input type="text" name="bakasha[pniyas_attributes][{{pniya_id}}][haavaras_attributes][{{id}}][hotsaa_from]"/><input type="text" name="bakasha[pniyas_attributes][{{pniya_id}}][haavaras_attributes][{{id}}][hotsaa_to]"/>
+          <input type="text" class="prat one" name='bakasha[pniyas_attributes][{{pniya_id}}][haavaras_attributes][{{id}}][prat]'/>
         </td>
-        <td>
-          <input type="text" name="bakasha[pniyas_attributes][{{pniya_id}}][haavaras_attributes][{{id}}][hotsaa_mut_from]"/><input type="text" name="bakasha[pniyas_attributes][{{pniya_id}}][haavaras_attributes][{{id}}][hotsaa_mut_to]"/>
+        <td class="prat-name">
+          <span class='prat-name-value'>&nbsp;</span>
+          <input type="hidden" name='bakasha[pniyas_attributes][{{pniya_id}}][haavaras_attributes][{{id}}][prat_name]'/>
         </td>
         <td>
-          <input type="text" name="bakasha[pniyas_attributes][{{pniya_id}}][haavaras_attributes][{{id}}][harshaa_from]"/><input type="text" name="bakasha[pniyas_attributes][{{pniya_id}}][haavaras_attributes][{{id}}][harshaa_to]"/>
+          <span>מ-</span>
+          <br>
+          <span>ל-</span>
         </td>
         <td>
-          <input type="text" name="bakasha[pniyas_attributes][{{pniya_id}}][haavaras_attributes][{{id}}][ska_from]"/><input type="text" name="bakasha[pniyas_attributes][{{pniya_id}}][haavaras_attributes][{{id}}][ska_to]"/>
-        </td>
-        <td><input class="diff one" type="text" name="bakasha[pniyas_attributes][{{pniya_id}}][haavaras_attributes][{{id}}][diff_hotsaa]"/>
+          <input class="money" type="text" name="bakasha[pniyas_attributes][{{pniya_id}}][haavaras_attributes][{{id}}][hotsaa_from]"/>
+          <input class="money" type="text" name="bakasha[pniyas_attributes][{{pniya_id}}][haavaras_attributes][{{id}}][hotsaa_to]"/>
         </td>
         <td>
-          <input class="diff one" type="text" name="bakasha[pniyas_attributes][{{pniya_id}}][haavaras_attributes][{{id}}][diff_hotsaa_mut]"/>
+          <input class="money" type="text" name="bakasha[pniyas_attributes][{{pniya_id}}][haavaras_attributes][{{id}}][hotsaa_mut_from]"/>
+          <input class="money" type="text" name="bakasha[pniyas_attributes][{{pniya_id}}][haavaras_attributes][{{id}}][hotsaa_mut_to]"/>
         </td>
-        <td><input class="diff one" type="text" name="bakasha[pniyas_attributes][{{pniya_id}}][haavaras_attributes][{{id}}][diff_harshaa]"/>
+        <td>
+          <input class="money" type="text" name="bakasha[pniyas_attributes][{{pniya_id}}][haavaras_attributes][{{id}}][harshaa_from]"/>
+          <input class="money" type="text" name="bakasha[pniyas_attributes][{{pniya_id}}][haavaras_attributes][{{id}}][harshaa_to]"/>
         </td>
-        <td><input class="diff one" type="text" name="bakasha[pniyas_attributes][{{pniya_id}}][haavaras_attributes][{{id}}][diff_ska]"/></td>
+        <td>
+          <input class="money" type="text" name="bakasha[pniyas_attributes][{{pniya_id}}][haavaras_attributes][{{id}}][ska_from]"/>
+          <input class="money" type="text" name="bakasha[pniyas_attributes][{{pniya_id}}][haavaras_attributes][{{id}}][ska_to]"/>
+        </td>
+        <td>
+          <input class="diff one money" type="text" name="bakasha[pniyas_attributes][{{pniya_id}}][haavaras_attributes][{{id}}][diff_hotsaa]"/>
+        </td>
+        <td>
+          <input class="diff one money" type="text" name="bakasha[pniyas_attributes][{{pniya_id}}][haavaras_attributes][{{id}}][diff_hotsaa_mut]"/>
+        </td>
+        <td>
+          <input class="diff one money" type="text" name="bakasha[pniyas_attributes][{{pniya_id}}][haavaras_attributes][{{id}}][diff_harshaa]"/>
+        </td>
+        <td>
+          <input class="diff one money" type="text" name="bakasha[pniyas_attributes][{{pniya_id}}][haavaras_attributes][{{id}}][diff_ska]"/>
+        </td>
       </tr>
     </script>
 

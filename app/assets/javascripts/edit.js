@@ -11,14 +11,23 @@
         fillFields(bakasha);
 
         // bind this when create pniya
-        $(".pniya-table").bind("change", function() {
+        $(".pniya-table").live("change", function() {
             dirty = true;
             toggleSaveButton(false);
         });
 
         $(".submit").bind("click", function(e) {
             e.preventDefault();
-            $("#dialog-confirm").dialog('open');
+            var isValid = true;
+            $(".pniya-table-wrap").each(function() {
+                if (!$(this).bakashaTable("validate"))
+                    isValid = false;
+            });
+            if (isValid == false) {
+                $("#dialog-invalid").dialog("open");
+            } else {
+                $("#dialog-confirm").dialog('open');
+            }
         });
 
         $("#dialog-confirm").dialog({
@@ -30,11 +39,13 @@
             buttons: {
                 "כן": function() {
                     $("input#bakasha_finalized").val(true);
+                    $(".pniya-table-wrap").bakashaTable("normalizeNumbers");
                     $( this ).dialog( "close" );
                     $("form#new_bakasha").submit();
                 },
                 "לא": function() {
                     $("input#bakasha_finalized").val(false);
+                    $(".pniya-table-wrap").bakashaTable("normalizeNumbers");
                     $( this ).dialog( "close" );
                     $("form#new_bakasha").submit();
                 },
@@ -44,6 +55,19 @@
                 }
             }
         });
+
+        $("#dialog-invalid").dialog({
+            resizable: false,
+            width: 500,
+            modal: true,
+            autoOpen: false,
+            dialogClass: "dialog-submit-bakasha",
+            buttons: {
+                "בסדר, הבנתי": function() {
+                    $(this).dialog("close");
+                }
+            }
+        })
 
         toggleSaveButton(true);
         restartSaveInterval();
@@ -88,7 +112,7 @@
             var $pniya = $(this);
             var pniyaObj = {
                 mispar: $('.mispar-pniya input', $pniya).val(),
-                haavarot: $(".pniya-table", $pniya).bakashaTable("toJSON")
+                haavarot: $(".pniya-table-wrap", $pniya).bakashaTable("toJSON")
             };
             bakasha.pniyot.push(pniyaObj);
         });
