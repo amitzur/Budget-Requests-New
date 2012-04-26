@@ -21,26 +21,26 @@
     var methods = {
         init: function(options) {
             settings = $.extend(settings, options);
-            var $table = this;
+            var _this = this, $table = $(Handlebars.templates.pniyaTable({}));
 
-            this.append(Handlebars.templates.pniyaTable({}));
+            this.append($table).addClass("pniya-table-wrap");
 
-            this.delegate("input, select, textarea", "change", function() {
+            $table.delegate("input, select, textarea", "change", function() {
                 $table.trigger("change.pniya", this);
             });
 
-            this.delegate("tr.pniya-row:last-child td:last-child input", "keypress", function(e) {
+            $table.delegate("tr.pniya-row:last-child td:last-child input", "keydown", function(e) {
                 if (e.keyCode == 9 && !e.shiftKey) {
-                    $table.addRow();
+                    methods.addRow.apply(_this);
                     e.preventDefault();
                 }
             });
 
-            this.delegate("input.diff", "change", function() {
+            $table.delegate("input.diff", "change", function() {
                 colorDiff($(this));
             });
 
-            this.delegate("input", "change", function() {
+            $table.delegate("input", "change", function() {
                 var $this = $(this);
                 if (isNaN(Number($this.val()))) {
                     $this.addClass("invalid");
@@ -49,7 +49,7 @@
                 }
             });
 
-            this.delegate("input.prat", "change", function() {
+            $table.delegate("input.prat", "change", function() {
                 var $pratName = $(this).closest("td").next(".prat-name");
                 if ($(this).val().trim() != "") {
                     var val = $(this).val()[0] == "0" && $(this).val()[1] == "0" ? $(this).val() : "00" + $(this).val();
@@ -59,15 +59,23 @@
                     });
                 }
             });
+
+            this.find(".add-row").bind("click", function() {
+                methods.addRow.apply(_this);
+            });
+
+            return this;
         },
 
         addRow: function(options) {
             options || (options = {});
+            var rows = this.data("rows");
             if (!rows)
                 rows = 1;
             else
                 rows++;
-            var $newRow = $(Handlebars.templates.row({ pniya_id : settings.id, id: rows })).appendTo(this.children("tbody"));
+            this.data("rows", rows);
+            var $newRow = $(Handlebars.templates.row({ pniya_id : settings.id, id: rows })).appendTo(this.find("tbody"));
             $(".prat", $newRow).focus();
             if (options.value) {
                 var $inputs = $("input", $newRow);
@@ -99,16 +107,18 @@
         }
     };
 
-    var rows;
     $(function() {
         Handlebars.templates.row = Handlebars.compile($("#pniya-row-template").html());
         Handlebars.templates.pniyaTable = Handlebars.compile($("#pniya-table-template").html());
     });
 
     function colorDiff($input) {
-        if ($input.val() > 0)
+        var val = Number($input.val());
+        if (val == 0 || isNaN(val))
+            $input.removeClass("positive negative");
+        else if (val > 0)
             $input.addClass("positive").removeClass("negative");
-        else if ($input.val() < 0)
+        else if (val < 0)
             $input.addClass("negative").removeClass("positive");
     }
 
