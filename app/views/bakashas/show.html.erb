@@ -22,6 +22,7 @@
 </div>
 
 <div class='bakasha <%= @bakasha.finalized ? "" : "unfinalized" %>'>
+    <input type="hidden" class="bakasha-id" value="<%= @bakasha.id %>"/>
     <h3><%= t :bakasha %></h3>
     <div class='bakasha-details'>
       <div class='detail bakasha-date'>
