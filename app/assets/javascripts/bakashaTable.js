@@ -33,11 +33,7 @@
                 }
             });
 
-            $table.delegate("input.diff", "change", function() {
-                colorDiff($(this));
-            });
-
-            $table.delegate("input", "change", function() {
+            $table.delegate("input.money", "change", function() {
                 var $this = $(this), val = $this.val();
                 if (isNaN(Number(val)) && !isValidNumber(val)) {
                     $this.addClass("invalid");
@@ -46,6 +42,10 @@
                     if (!isNaN(Number(val)))
                         $this.val(addCommasToNumber(val));
                 }
+            });
+
+            $table.delegate("input.diff", "change", function() {
+                colorDiff($(this));
             });
 
             $table.delegate("input.prat", "change", function() {
@@ -134,6 +134,10 @@
     });
 
     function colorDiff($input) {
+        if (!isValidNumber($input.val())) {
+            $input.removeClass("positive negative").addClass("invalid");
+            return;
+        }
         var val = Number($input.val().replace(/,/g, ""));
         if (val == 0 || isNaN(val))
             $input.removeClass("positive negative");
