@@ -9,7 +9,12 @@
     window.KsafimApi = {
         createPniya: function(opts) {
             opts || (opts = {});
-            var $pniya = $(Handlebars.templates.pniya({ id: pniyaNum++ }));
+            var $pniya = $(Handlebars.templates.pniya({ id: pniyaNum, rid: opts.rid }));
+            $pniya.data("id", pniyaNum++ );
+            if (opts.mode == "edit") {
+                $(".start-filling, .enter-number, .question-mark", $pniya).remove();
+                $pniya.data("mode", "edit");
+            }
             $(".pniyot").append($pniya);
             if (opts.noAnimation) return $pniya;
             $pniya.hide();
@@ -137,7 +142,7 @@
             id = Number(id);
 
             $input.bind("keypress mousedown", function() { return false; }).addClass("disabled");
-            var $pniyaTable = $("<div></div>").bakashaTable({ id: pniyaNum }).appendTo($pniya);
+            var $pniyaTable = $("<div></div>").bakashaTable({ id: $pniya.data("id") || 0 }).appendTo($pniya);
             $pniyaTable.bakashaTable("addRow");
             $this.remove();
             $(".enter-number", $pniya).remove();

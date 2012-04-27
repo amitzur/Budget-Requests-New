@@ -56,6 +56,13 @@ class BakashasController < ApplicationController
   # GET /bakashas/1/edit
   def edit
     @bakasha = Bakasha.find(params[:id])
+    data = {}
+    data[:bakasha] = @bakasha
+    data[:bakasha][:pniyas] = @bakasha.pniyas
+    @bakasha.pniyas.each_with_index do |pniya, index|
+      data[:bakasha][:pniyas][index][:haavaras] = pniya.haavaras
+    end
+    @bakasha_json = "#{data.to_json}"
   end
 
   # POST /bakashas

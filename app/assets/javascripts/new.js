@@ -67,7 +67,7 @@
                     $(this).dialog("close");
                 }
             }
-        })
+        });
 
         toggleSaveButton(true);
         restartSaveInterval();

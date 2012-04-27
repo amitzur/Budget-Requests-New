@@ -78,15 +78,18 @@
             var $newRow = $(Handlebars.templates.row({ pniya_id : pniya_id, id: rows })).appendTo(this.find("tbody"));
             $(".prat", $newRow).focus();
             if (options.value) {
-                var $inputs = $("input", $newRow);
-                for (var i= 0, ii=options.value.numbers.length; i < ii; i++) {
-                    var $input = $($inputs.get(i));
-                    $input.val(options.value.numbers[i]);
-                    if ($input.hasClass("diff"))
-                        colorDiff($input);
+                for (var field in options.value) {
+                    if (options.value.hasOwnProperty(field)) {
+                        var $input = $("input[name*='" + field + "']", $newRow);
+                        if ($input.length === 0) continue;
+                        $input[0].value = options.value[field];
+                        if ($input.hasClass("diff"))
+                            colorDiff($input);
+                    }
                 }
-                $("span.prat-name-value", $newRow).text(options.value.name);
-                $("td.prat-name input", $newRow).val(options.value.name);
+
+                $("span.prat-name-value", $newRow).text(options.value["prat_name"]);
+                $("td.prat-name input", $newRow).val(options.value["prat_name"]);
             }
             return this;
         },
@@ -94,14 +97,14 @@
         toJSON: function() {
             var ret = [];
             $(".pniya-row", this).each(function() {
-                var $haavara = $(this), haavara = {
-                    name: $(".prat-name", $haavara).text(),
-                    numbers: []
-                };
-                ret.push(haavara);
+                var $haavara = $(this), haavara = {};
                 $("input", $haavara).each(function() {
-                    haavara.numbers.push($(this).val());
+                    var name = $(this).attr("name");
+                    name = name.substring(name.lastIndexOf("["), name.length - 1);
+                    haavara[name] = $(this).val();
                 });
+                haavara["prat_name"] = $(".prat-name-value", $haavara).text();
+                ret.push(haavara);
             });
             return ret;
         },
@@ -150,5 +153,7 @@
 
     var validNumberRe = /^-?\d{1,3}(,\d{3})*(\.\d+)?$/;
     var addCommasRe = /\B(?=(?:\d{3})+(?!\d))/g;
+
+    var fields = ["prat", "prat_name", "hotsaa_to", "hotsaa_from", "hotsaa_mut_from", "hotsaa_mut_to", "harshaa_to", "harshaa_from", "ska_to", "ska_from", "diff_hotsaa", "diff_hotsaa_mut", "diff_harshaa", "diff_ska"];
 
 })(jQuery);

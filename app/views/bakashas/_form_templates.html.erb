@@ -19,6 +19,7 @@
       <tr class="pniya-row">
         <td>
           <input type="text" class="prat one" name='bakasha[pniyas_attributes][{{pniya_id}}][haavaras_attributes][{{id}}][prat]'/>
+          <input type="hidden" class="haavara-id" name='bakasha[pniyas_attributes][{{pniya_id}}][haavaras_attributes][{{id}}][id]'/>
         </td>
         <td class="prat-name">
           <span class='prat-name-value'>&nbsp;</span>
@@ -63,6 +64,7 @@
     <script type="text/x-handlebar-template" id="pniya-template">
       <div class='pniya' id='pniya-{{id}}'>
         <h4><%=t :pniya %></h4>
+        <input type="hidden" class="pniya-id" name="bakasha[pniyas_attributes][{{id}}][id]" value="{{rid}}"/>
 
         <div class='detail mispar-pniya'>
           <label for="mispar-pniya-{{id}}"><%=t :mispar_pniya %>:</label>
