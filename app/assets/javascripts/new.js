@@ -61,7 +61,7 @@
             width: 500,
             modal: true,
             autoOpen: false,
-            dialogClass: "dialog-submit-bakasha",
+            dialogClass: "dialog-submit-bakasha dialog-invalid",
             buttons: {
                 "בסדר, הבנתי": function() {
                     $(this).dialog("close");

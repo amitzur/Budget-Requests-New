@@ -510,6 +510,15 @@ header {
     outline: 0 none;
 }
 
+@mixin explanation($width: 200px, $height: 250px) {
+  width: $width;
+  height: $height;
+  left: -1 * ($width + 5);
+  .explanation-img {
+    background-size: $width auto;
+  }
+}
+
 .question-mark {
     height: 28px;
     width: 28px;
@@ -520,21 +529,18 @@ header {
     margin-right: 5px;
 
     .explanation {
-        display:none;
-        visibility: hidden;
-        width: 200px;
-        height: 250px;
-        background-color: brown;
-        position: absolute;
-        left: -205px;
-        z-index: 10;
+      display:none;
+      visibility: hidden;
+      background-color: white;
+      position: absolute;
+      z-index: 10;
+      border: 2px solid black;
     }
 
     .explanation-img {
         position: absolute;
         width: 100%;
         height: 100%;
-        background-size: 200px auto;
         z-index: 11;
     }
 
@@ -554,64 +560,39 @@ header {
     }
 }
 
-
-.detail.from-pniya {
-    .explanation {
-        height: 150px;
-    }
-}
-
-.detail.to-pniya {
-    .explanation {
-        height: 150px;
-    }
-}
-
-.detail.mispar-pniya {
-    .explanation {
-        height: 150px;
-    }
-}
-
-.detail.amount-pniya {
-    .explanation {
-        height: 150px
-    }
-}
-
 .detail.bakasha-date {
+  .explanation {
+    @include explanation(300px, 200px);
     .explanation-img {
-        background-image : url(/assets/date.jpg)
+      background-image : url(/assets/meeting_date_example.jpg);
     }
+  }
 }
 
 .detail.bakasha-meeting-reason {
+  .explanation {
+    @include explanation(300px, 200px);
     .explanation-img {
-        background-image: url(/assets/meeting_date.jpg)
+      background-image: url(/assets/meeting_reason_example.jpg);
     }
+  }
+}
+
+.detail.bakasha-description {
+  .explanation {
+    @include explanation(300px, 200px);
+    .explanation-img {
+      background-image: url(/assets/meeting_reason2_example.jpg);
+    }
+  }
 }
 
 .detail.mispar-pniya {
-    .explanation-img {
-        background-image: url(/assets/mispar_haavara.jpg)
+    .explanation {
+      @include explanation(400px, 300px);
     }
-}
-
-.detail.from-pniya {
     .explanation-img {
-        background-image: url(/assets/from_haavara.jpg)
-    }
-}
-
-.detail.to-pniya {
-    .explanation-img {
-        background-image: url(/assets/to_haavara.jpg)
-    }
-}
-
-.detail.amount-pniya {
-    .explanation-img {
-        background-image: url(/assets/amount_haavara.jpg)
+        background-image: url(/assets/pniya_mispar.jpg)
     }
 }
 
@@ -820,9 +801,15 @@ ul.login {
 }
 
 .dialog-submit-bakasha {
-
-
   .ui-dialog-buttonset{
     float:left;
+  }
+}
+
+.dialog-invalid {
+  img {
+    width: 440px;
+    display: block;
+    margin-bottom: 10px;
   }
 }
