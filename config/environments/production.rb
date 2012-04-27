@@ -46,7 +46,7 @@ Ksafim::Application.configure do
   # config.action_controller.asset_host = "http://assets.example.com"
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
-  config.assets.precompile += ['screen.css', 'ui-lightness/jquery-ui-1.8.19.custom.css', 'vendor/jquery-1.7.1.min.js', 'vendor/handlebars-1.0.0.beta.6.js', 'vendor/jquery-ui-1.8.19.custom.min.js', 'vendor/jquery.ui.datepicker-he.js', 'detect_pdf.js', 'ksafim.js', 'edit.js', 'vendor/jsuri-1.1.1.min.js', 'bakashaTable.js', 'index.js', 'show.js']
+  config.assets.precompile += ['screen.css', 'ui-lightness/jquery-ui-1.8.19.custom.css', 'vendor/jquery-1.7.1.min.js', 'vendor/handlebars-1.0.0.beta.6.js', 'vendor/jquery-ui-1.8.19.custom.min.js', 'vendor/jquery.ui.datepicker-he.js', 'detect_pdf.js', 'ksafim.js', 'edit.js', 'vendor/jsuri-1.1.1.min.js', 'bakashaTable.js', 'index.js', 'show.js', 'new.js']
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
