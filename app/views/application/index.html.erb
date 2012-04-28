@@ -1,6 +1,52 @@
 <% content_for :javascripts do %>
     <%= javascript_include_tag "index.js" %>
+    <%= javascript_include_tag "carousel.js" %>
+    <%= stylesheet_link_tag "carousel", :media => "screen" %>
 <% end %>
+<div class="carousel-wrap">
+    <div class="carousel">
+      <div class="item level-1" id="cover-story">
+        <div class="marker">
+          <img class="cover-story" src="http://www.clker.com/cliparts/f/a/b/8/11949856441703715891another_folder_icon_01.svg.med.png" alt=""/>
+        </div>
+        <div class="title"><%=t :carousel_cover_title %></div>
+        <div class="short-description"><%=t :carousel_cover_short_desc %></div>
+        <div class="description"><%=t :carousel_cover_desc %></div>
+      </div>
+      <div class="item level-2" id="who-we-are">
+        <div class="marker">
+          <img class="hasadna" src="http://a0.twimg.com/profile_images/1163986937/hasdna_logo_normal.png" alt="הסדנא לידע ציבורי"/>
+        </div>
+        <div class="title"><%=t :carousel_who_title %></div>
+        <div class="short-description"><%=t :carousel_who_short_desc %></div>
+        <div class="description"><%=t :carousel_who_description %></div>
+      </div>
+      <div class="item level-3" id="what-to-do-here">
+        <div class="marker">
+          <img class="pencil" src="http://autofillforms.mozdev.org/graphics/pencil.svg" alt="">
+        </div>
+        <div class="title"><%=t :carousel_usage_title %></div>
+        <div class="short-description"><%=t :carousel_usage_short_desc %></div>
+        <div class="description"><%=t :carousel_usage_desc %></div>
+      </div>
+      <div class="item level-4 a" id="what-plans">
+        <div class="marker">
+          <img class="plans" src="http://cdn1.iconfinder.com/data/icons/devine_icons/Black/PNG/System%20and%20Internet/Times%20and%20Dates.png" alt="">
+        </div>
+        <div class="title"><%=t :carousel_future_title %></div>
+        <div class="short-description"><%=t :carousel_future_short_desc%></div>
+        <div class="description"><%=t :carousel_future_desc %></div>
+      </div>
+      <div class="item level-4 b" id="why-facebook">
+        <div class="marker">
+          <img class="facebook" src="http://www.nycafterdusk.com/wp-content/uploads/2011/12/facebook-icon.png" alt="למה צריך להתחבר דרך פייסבוק?"/>
+        </div>
+        <div class="title"><%=t :carousel_facebook_title %></div>
+        <div class="short-description"><%=t :carousel_facebook_short_desc %></div>
+        <div class="description"><%=t :carousel_facebook_desc %></div>
+      </div>
+    </div>
+</div>
 
 <div class="scans-wrap">
     <h3><%=t :untagged_list %></h3>

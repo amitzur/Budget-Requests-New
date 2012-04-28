@@ -17,7 +17,6 @@ class ApplicationController < ActionController::Base
       end
     end
     @heading = 'welcome'
-    @subheading = 'welcome_desc'
   end
 
   def get_budget

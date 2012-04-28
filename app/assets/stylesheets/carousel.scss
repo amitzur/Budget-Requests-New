@@ -1,0 +1,246 @@
+$num-level-4: 2;
+
+$container-height: 480px;
+$container-width: 720px;
+
+$level-1-height: $container-height * 0.8;
+$level-2-height: $level-1-height;
+$level-3-height: $container-height * 0.2;
+$level-4-height: $level-3-height;
+
+$level-1-width: $container-width * 0.7;
+$level-2-width: $container-width * 0.3;
+$level-4-width: $level-4-height;
+
+$level-4-gap: $container-width * 0.1;
+
+@mixin marker($height: $level-4-height, $background-color: white) {
+  .marker {
+    position: absolute;
+    height: $height;
+    width: $height;
+    border-radius: $height;
+    line-height: $height;
+    -webkit-transition: all 1s ease-in-out 0s;
+    background-color: $background-color;
+    color: darkblue;
+    font-weight: bold;
+    font-size: $height / 2;
+    text-align: center;
+    cursor: pointer;
+    z-index: 1;
+
+    img {
+      -webkit-transition: all 1s ease-in-out 0s;
+      &.hasadna {
+        position: relative;
+        left: 1px;
+        top: 1px;
+        height: $height;
+      }
+
+      &.facebook {
+        position: relative;
+        top: -5px;
+        left: 4px;
+        height: $height + 10px;
+      }
+
+      &.cover-story {
+        height: $height;
+      }
+
+      &.pencil {
+        height: $height - 27px;
+        position: relative;
+        top: 10px;
+        left: 2px;
+      }
+
+      &.plans {
+        height: $height - 4px;
+        position: relative;
+        top: 3px;
+      }
+    }
+  }
+}
+
+.carousel-wrap {
+
+  width: 720px;
+  height: 480px;
+  margin: -50px auto 0 auto;
+  padding: 20px;
+
+  .carousel {
+    direction: rtl;
+    font-family: sans-serif;
+    position: relative;
+    height: 100%;
+    width: 100%;
+
+    .item {
+      background-color: white;
+      position: absolute;
+      -webkit-transition: all 1s ease-in-out 0s;
+      border-radius: 1em;
+      -webkit-box-sizing: border-box;
+
+      .title, .description {
+        -webkit-transition: all 1s ease-in-out 0s;
+      }
+    }
+
+    .level-1 {
+      width: $level-1-width;
+      height: $level-1-height;
+      left: -10px;
+      top: -10px;
+      //background-color: snow;
+      padding: 20px;
+
+      @include marker;
+
+      .title {
+        position: relative;
+        top: 0;
+        text-indent: $level-4-height + 10px;
+        font-size: 3em;
+        font-weight: bold;
+        text-decoration: underline;
+        line-height: $level-4-height;
+      }
+
+      .short-description {
+        opacity: 0;
+        display: none;
+      }
+
+      .description {
+        position: relative;
+        top: 10px;
+        line-height: 1.5em;
+      }
+
+      &#why-facebook {
+        .title {
+          font-size: 1.8em;
+        }
+      }
+
+      &#cover-story {
+        .description {
+          line-height: 1em;
+        }
+      }
+    }
+
+    .level-2 {
+      width: $level-2-width;
+      height: $level-2-height;
+      left: $level-1-width;
+      top: -10px;
+      //background-color: #ff7f50;
+      padding: 20px;
+
+      @include marker($level-4-height / 2);
+
+      .title {
+        font-size: 2em;
+        line-height: 1.5em;
+        position: relative;
+        top: ($level-4-height / 2) + 5px;
+        text-decoration: underline;
+        font-weight: bold;
+      }
+
+      .short-description {
+        position: relative;
+        top: ($level-4-height / 2) + 35px;
+        font-style: italic;
+      }
+
+      .description {
+        opacity: 0;
+        display: none;
+      }
+
+      &#what-to-do-here {
+        .title {
+          font-size: 1.7em;
+        }
+
+        .marker .pencil {
+          height: $level-4-height / 2;
+        }
+      }
+
+      &#what-plans {
+        .title {
+          font-size: 1.7em;
+        }
+      }
+    }
+
+    .level-3 {
+      $level-3-left: ($level-4-width + $level-4-gap)* $num-level-4;
+      $padding: 10px;
+
+      width: $container-width - $level-3-left;
+      height: $level-3-height;
+      top: $level-1-height;
+      left: $level-3-left;
+      //background-color: #e9967a;
+      border-radius: $level-4-height;
+      padding: $padding;
+
+      @include marker($level-4-height - 2 * $padding);
+
+      .title {
+        position: relative;
+        top: 0;
+        text-indent: $level-4-height;
+        font-size: 2em;
+        font-weight: bold;
+        line-height: $level-3-height - 2 * $padding;
+      }
+
+      .description, .short-description {
+        opacity: 0;
+      }
+
+
+    }
+
+    .level-4 {
+      width: $level-4-width;
+      height: $level-4-height;
+      top: $level-1-height;
+      border-radius: $level-4-height;
+
+      @include marker;
+
+      .title {
+        font-size: 0.8em;
+        font-weight: bold;
+        text-decoration: underline;
+        opacity: 0;
+      }
+
+      .description, .short-description {
+        opacity: 0;
+        display: none;
+      }
+
+      &.a {
+        //background-color: #b8860b;
+        left: -10px;
+      }
+      &.b {
+        left: $level-4-width + $level-4-gap;
+        //background-color: #daa520;
+      }
+    }
+  }
+}
