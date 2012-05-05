@@ -24,3 +24,4 @@ app/assets/stylesheets/responsive.scss
 seeds_maker.rb
 .idea
 heroku.log
+latest.dump
