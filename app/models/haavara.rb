@@ -26,4 +26,20 @@ class Haavara < ActiveRecord::Base
 
     belongs_to :pniya
     belongs_to :user
+
+    def ==(h)
+      return false if self.prat != h.prat
+      return false if self.hotsaa_from != h.hotsaa_from
+      return false if self.hotsaa_to != h.hotsaa_to
+      return false if self.hotsaa_mut_from != h.hotsaa_mut_from
+      return false if self.hotsaa_mut_to != h.hotsaa_mut_to
+      return false if self.harshaa_from != h.harshaa_from
+      return false if self.harshaa_to != h.harshaa_to
+      return false if self.ska_from != h.ska_from
+      return false if self.ska_to != h.ska_to
+      return false if self.diff_hotsaa != h.diff_hotsaa
+      return false if self.diff_hotsaa_mut != h.diff_hotsaa_mut
+      return false if self.diff_harshaa != h.diff_harshaa
+      self.diff_ska == h.diff_ska
+    end
 end

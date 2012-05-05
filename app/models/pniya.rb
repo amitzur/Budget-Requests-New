@@ -17,4 +17,9 @@ class Pniya < ActiveRecord::Base
     accepts_nested_attributes_for :haavaras
 
     belongs_to :user
+
+    def ==(p)
+      return false if self.mispar != p.mispar
+      self.haavaras == p.haavaras
+    end
 end

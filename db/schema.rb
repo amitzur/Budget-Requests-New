@@ -11,13 +11,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120426213911) do
+ActiveRecord::Schema.define(:version => 20120503194236) do
 
   create_table "bakashas", :force => true do |t|
     t.date     "recv_date"
     t.string   "reason"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
     t.string   "meeting_reason"
     t.string   "file_name"
     t.integer  "scan_id"
@@ -25,6 +25,12 @@ ActiveRecord::Schema.define(:version => 20120426213911) do
     t.text     "description"
     t.boolean  "finalized"
     t.boolean  "reserve_usage"
+    t.integer  "final_bakasha_id"
+  end
+
+  create_table "final_bakashas", :force => true do |t|
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "haavaras", :force => true do |t|
@@ -58,8 +64,10 @@ ActiveRecord::Schema.define(:version => 20120426213911) do
 
   create_table "scans", :force => true do |t|
     t.string   "filename"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
+    t.integer  "bakashas_count",   :default => 0
+    t.integer  "final_bakasha_id"
   end
 
   create_table "users", :force => true do |t|

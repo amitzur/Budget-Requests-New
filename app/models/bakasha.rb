@@ -18,4 +18,11 @@ class Bakasha < ActiveRecord::Base
     accepts_nested_attributes_for :pniyas
 
     belongs_to :user
+    belongs_to :scan, :counter_cache => true
+
+    def ==(b)
+      return false if self.recv_date != b.recv_date
+      return false if self.meeting_reason != b.meeting_reason
+      self.pniyas == b.pniyas
+    end
 end
