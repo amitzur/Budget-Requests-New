@@ -647,6 +647,13 @@ ul.login {
     @include list;
 
     &.untagged {
+      text-align: center;
+      &:hover {
+        background-color: $banana;
+        opacity: 0.8;
+        cursor: pointer;
+      }
+
       .click-here {
         display: none;
         color: green;
@@ -658,6 +665,8 @@ ul.login {
       }
       &.unlogged {
         li {
+          padding: 2em;
+
           a.logged {
             display: none;
           }
@@ -668,9 +677,6 @@ ul.login {
           }
 
           &:hover {
-            background-color: $banana;
-            opacity: 0.8;
-            cursor: pointer;
             color: transparent;
             border-color: transparent;
 
@@ -700,6 +706,7 @@ ul.login {
       li {
         a.logged {
           display: block;
+          line-height: 5em;
         }
 
         span.unlogged {
