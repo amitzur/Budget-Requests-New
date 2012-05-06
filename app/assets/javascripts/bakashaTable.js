@@ -26,6 +26,11 @@
                 $table.trigger("change.pniya", this);
             });
 
+            $table.delegate("input", "focus", function() {
+                var newVal = $(this).prev("input").val(), oldVal = $(this).val();
+                if (newVal && !oldVal) $(this).val(newVal);
+            });
+
             $table.delegate("tr.pniya-row:last-child td:last-child input", "keydown", function(e) {
                 if (e.keyCode == 9 && !e.shiftKey) {
                     methods.addRow.apply(_this);
