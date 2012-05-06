@@ -12,7 +12,7 @@
 class Pniya < ActiveRecord::Base
     attr_accessible :mispar, :haavaras_attributes
     belongs_to :bakasha
-    has_many :haavaras
+    has_many :haavaras, :order => :id
 
     accepts_nested_attributes_for :haavaras
 

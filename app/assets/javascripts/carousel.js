@@ -17,7 +17,7 @@ $(function() {
         interval = setInterval(doCycle, time);
     }
 
-    $(".marker").click(function() {
+    $(".item").click(function() {
         time = 30000;
         restart();
         var $this = $(this), $item = $this.closest(".item");

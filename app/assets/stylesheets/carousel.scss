@@ -22,6 +22,7 @@ $level-4-gap: $container-width * 0.1;
     border-radius: $height;
     line-height: $height;
     -webkit-transition: all 1s ease-in-out 0s;
+    -moz-transition: all 1s ease-in-out 0s;
     background-color: $background-color;
     color: darkblue;
     font-weight: bold;
@@ -32,6 +33,7 @@ $level-4-gap: $container-width * 0.1;
 
     img {
       -webkit-transition: all 1s ease-in-out 0s;
+      -moz-transition: all 1s ease-in-out 0s;
       &.hasadna {
         position: relative;
         left: 1px;
@@ -84,11 +86,14 @@ $level-4-gap: $container-width * 0.1;
       background-color: white;
       position: absolute;
       -webkit-transition: all 1s ease-in-out 0s;
+      -moz-transition: all 1s ease-in-out 0s;
       border-radius: 1em;
       -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
 
       .title, .description {
         -webkit-transition: all 1s ease-in-out 0s;
+        -moz-transition: all 1s ease-in-out 0s;
       }
     }
 
