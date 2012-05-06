@@ -20,6 +20,6 @@ class Pniya < ActiveRecord::Base
 
     def ==(p)
       return false if self.mispar != p.mispar
-      self.haavaras.order(:id) == p.haavaras.order(:id)
+      self.haavaras == p.haavaras
     end
 end
