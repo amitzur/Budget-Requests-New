@@ -14,7 +14,7 @@ class Pniya < ActiveRecord::Base
     belongs_to :bakasha
     has_many :haavaras, :order => :id
 
-    accepts_nested_attributes_for :haavaras
+    accepts_nested_attributes_for :haavaras, :reject_if => proc { |h| h[:prat].blank? and h[:hotsaa_from].blank? and h[:hotsaa_to].blank? and h[:hotsaa_mut_from].blank? and h[:hotsaa_mut_to].blank? and h[:harshaa_from].blank? and h[:harshaa_to].blank? and h[:ska_from].blank? and h[:ska_to].blank? and h[:diff_hotsaa].blank? and h[:diff_hotsaa_mut].blank? and h[:diff_harshaa].blank? and h[:diff_ska].blank? }
 
     belongs_to :user
 

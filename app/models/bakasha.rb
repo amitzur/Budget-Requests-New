@@ -15,7 +15,7 @@ class Bakasha < ActiveRecord::Base
     attr_accessible :recv_date, :meeting_reason, :pniyas_attributes, :scan_id, :description, :finalized, :reserve_usage
     has_many :pniyas
 
-    accepts_nested_attributes_for :pniyas
+    accepts_nested_attributes_for :pniyas, :reject_if => proc { |p| p[:haavaras_attributes].nil? }
 
     belongs_to :user
     belongs_to :scan, :counter_cache => true
