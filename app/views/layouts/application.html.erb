@@ -4,6 +4,12 @@
   <meta charset="UTF-8">
   <title><%= @title %></title>
   <meta name="author" content="Amit Zur">
+  <meta property="og:title" content="<%=t :og_title %>">
+  <meta property="og:site_name" content="<%=t :og_site_name %>">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="http://www.openmoney.org.il/">
+  <meta property="og:description" content="<%=t :og_description %>">
+  <meta property="og:image" content="http://www.hasadna.org.il/wp-content/themes/sadna2012/images/sadna200x200.png">
   <%= csrf_meta_tag %>
   <%= stylesheet_link_tag "screen", :media => "screen" %>
   <%= stylesheet_link_tag "ui-lightness/jquery-ui-1.8.19.custom.css", :media => "screen" %>
