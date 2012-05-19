@@ -72,8 +72,11 @@ $level-4-gap: $container-width * 0.1;
 
   width: 720px;
   height: 480px;
-  margin: -50px auto 0 auto;
-  padding: 20px;
+  margin: 0 auto;
+  padding: 20px 10%;
+  background: #016881;
+  border: 5px solid #024758;
+  border-radius: 1em;
 
   .carousel {
     direction: rtl;
