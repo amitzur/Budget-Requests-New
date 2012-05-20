@@ -1,0 +1,8 @@
+<h1><%=t :list_of_scans %></h1>
+<ol>
+  <% @scans.each do |scan| %>
+    <li>
+      <a href="<%= 'https://s3-eu-west-1.amazonaws.com/hasadna-budget-requests/' + scan[:filename].gsub(' ', '+') %>" class=""><%= scan.filename %></a>
+    </li>
+  <% end %>
+</ol>

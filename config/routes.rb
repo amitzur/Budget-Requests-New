@@ -6,6 +6,8 @@ Ksafim::Application.routes.draw do
 
   match '/open-budget/:id' => 'application#get_budget'
 
+  match '/scans' => 'scans#index'
+
   root :to => 'application#index'
 
 end
