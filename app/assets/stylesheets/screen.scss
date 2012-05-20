@@ -1,5 +1,12 @@
 @import "compass/reset";
 
+@font-face {
+  font-family: "Rutz_OERegularPro";
+  font-style: normal;
+  font-weight: normal;
+  src: url("/rutz_oeregpro-Rutz.eot") format("eot"), url("/rutz_oeregpro-Rutz.woff") format("woff"), url("/rutz_oeregpro-Rutz.svg") format("svg");
+}
+
  //////// fluid layout //////////////
 $columns: 12;
 $column-width: 60px;
@@ -128,7 +135,7 @@ $navy		: #012D38;
 
 html {
     width: 100%;
-    font: 100% "Arial", sans-serif;
+    font-family: Rutz_OERegularPro,Arial,sans-serif;
     min-height: 100%;
 }
 
