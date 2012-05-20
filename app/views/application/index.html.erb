@@ -1,77 +1,35 @@
-<% content_for :javascripts do %>
-    <%= javascript_include_tag "index.js" %>
-    <%= javascript_include_tag "carousel.js" %>
-    <%= stylesheet_link_tag "carousel", :media => "screen" %>
-<% end %>
-<div class="carousel-wrap">
-    <div class="carousel">
-      <div class="item level-1" id="cover-story">
-        <div class="marker">
-          <img class="cover-story" src="http://www.clker.com/cliparts/f/a/b/8/11949856441703715891another_folder_icon_01.svg.med.png" alt=""/>
-        </div>
-        <div class="title"><%=t :carousel_cover_title %></div>
-        <div class="short-description"><%=t :carousel_cover_short_desc %></div>
-        <div class="description"><%=t :carousel_cover_desc %></div>
-      </div>
-      <div class="item level-2" id="who-we-are">
-        <div class="marker">
-          <img class="hasadna" src="http://a0.twimg.com/profile_images/1163986937/hasdna_logo_normal.png" alt="הסדנא לידע ציבורי"/>
-        </div>
-        <div class="title"><%=t :carousel_who_title %></div>
-        <div class="short-description"><%=t :carousel_who_short_desc %></div>
-        <div class="description"><%=t :carousel_who_description %></div>
-      </div>
-      <div class="item level-3" id="what-to-do-here">
-        <div class="marker">
-          <img class="pencil" src="http://autofillforms.mozdev.org/graphics/pencil.svg" alt="">
-        </div>
-        <div class="title"><%=t :carousel_usage_title %></div>
-        <div class="short-description"><%=t :carousel_usage_short_desc %></div>
-        <div class="description"><%=t :carousel_usage_desc %></div>
-      </div>
-      <div class="item level-4 a" id="what-plans">
-        <div class="marker">
-          <img class="plans" src="http://cdn1.iconfinder.com/data/icons/devine_icons/Black/PNG/System%20and%20Internet/Times%20and%20Dates.png" alt="">
-        </div>
-        <div class="title"><%=t :carousel_future_title %></div>
-        <div class="short-description"><%=t :carousel_future_short_desc%></div>
-        <div class="description"><%=t :carousel_future_desc %></div>
-      </div>
-      <div class="item level-4 b" id="why-facebook">
-        <div class="marker">
-          <img class="facebook" src="http://www.nycafterdusk.com/wp-content/uploads/2011/12/facebook-icon.png" alt="למה צריך להתחבר דרך פייסבוק?"/>
-        </div>
-        <div class="title"><%=t :carousel_facebook_title %></div>
-        <div class="short-description"><%=t :carousel_facebook_short_desc %></div>
-        <div class="description"><%=t :carousel_facebook_desc %></div>
-      </div>
-    </div>
+<div class="index-wrap">
+  <div class="index-right">
+    <p><%=t :index_right_p1 %></p>
+    <p class='no-idea bold'><%=t :index_right_p2 %></p>
+    <p><%=t :index_right_p3 %></p>
+  </div>
+  <div class="index-left">
+    <p class='solution bold'><%=t :index_left_p1 %></p>
+    <p class='deed'><span><%=t :peilei %> </span><a href="http://www.hasadna.org.il/"><%=t :hasadna %></a><span> <%=t :index_left_p2 %></span></span></p>
+    <p class='no-address'><%=t :index_left_p3 %></p>
+    <p><%=t :index_left_p4 %></p>
+    <p class='other-projects'></p>
+  </div>
 </div>
 
-<div class="scans-wrap">
-    <h3><%=t :untagged_list %></h3>
-    <ul class='scans untagged <% unless user_signed_in? %>unlogged<% end %>'>
-     <li><a class="logged" href="/bakashas/new?sid=<%= @next_scan.id %>"><%= @next_scan.filename %></a><span class="unlogged"><%= @next_scan.filename %></span></li>
-    <span class='click-here'><%=t :click_here %></span>
-    <span class='click-here-connecting'><%=t :connecting %></span>
-    </ul>
+<div class="index-bottom">
+  <p class='bold'><%=t :index_bottom_p1 %></p>
+  <ol>
+    <li><%=t :index_bottom_li1 %></li>
+    <li><%=t :index_bottom_li2 %></li>
+    <li><%=t :index_bottom_li3 %></li>
+  </ol>
 </div>
-<div class="scans-wrap">
-    <h3><%= link_to t(:tagged_list), bakashas_path %></h3>
-    <ul class='scans tagged '>
-      <% @tagged.each do |fb| %>
-          <li><a href="/bakashas/<%= fb.bakashas.first[:id] %>"><%= fb.scan[:filename] %></a></li>
-      <% end %>
-    </ul>
-</div>
+<div class="index-button-start"><a href="/start" class='index-button-start-a'><%=t :index_button_start %></a></div>
 
-<% if !current_user.nil? and current_user.bakashas.length > 0 %>
-    <div class="scans-wrap">
-      <h3><%=t :my_documents %></h3>
-      <ul class="scans">
-        <% current_user.bakashas.each do |bakasha| %>
-            <li><a href="/bakashas/<%= bakasha.id %>"><%= bakasha.scan.filename %></a></li>
-        <% end %>
-      </ul>
-    </div>
-<% end %>
+<div class="index-other-activities">
+    <p>
+      <%=t :other_activities %>:
+    </p>
+    <ol>
+      <li><a href="http://www.hasadna.org.il/"><%=t :hasadna %></a></li>
+      <li><a href="http://www.oknesset.org/"><%=t :oknesset %></a></li>
+      <li><a href="http://budget.msh.gov.il/"><%=t :open_budget %></a></li>
+    </ol>
+</div>

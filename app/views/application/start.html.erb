@@ -1,0 +1,31 @@
+<% content_for :javascripts do %>
+    <%= javascript_include_tag "index.js" %>
+<% end %>
+
+<div class="scans-wrap">
+  <h3><%=t :untagged_list %></h3>
+  <ul class='scans untagged <% unless user_signed_in? %>unlogged<% end %>'>
+    <li><a class="logged" href="/bakashas/new?sid=<%= @next_scan.id %>"><%= @next_scan.filename %></a><span class="unlogged"><%= @next_scan.filename %></span></li>
+    <span class='click-here'><%=t :click_here %></span>
+    <span class='click-here-connecting'><%=t :connecting %></span>
+  </ul>
+</div>
+<div class="scans-wrap">
+  <h3><%= link_to t(:tagged_list), bakashas_path %></h3>
+  <ul class='scans tagged '>
+    <% @tagged.each do |fb| %>
+        <li><a href="/bakashas/<%= fb.bakashas.first[:id] %>"><%= fb.scan[:filename] %></a></li>
+    <% end %>
+  </ul>
+</div>
+
+<% if !current_user.nil? and current_user.bakashas.length > 0 %>
+    <div class="scans-wrap">
+      <h3><%=t :my_documents %></h3>
+      <ul class="scans">
+        <% current_user.bakashas.each do |bakasha| %>
+            <li><a href="/bakashas/<%= bakasha.id %>"><%= bakasha.scan.filename %></a></li>
+        <% end %>
+      </ul>
+    </div>
+<% end %>

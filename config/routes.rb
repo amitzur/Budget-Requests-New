@@ -8,6 +8,8 @@ Ksafim::Application.routes.draw do
 
   match '/scans' => 'scans#index'
 
+  match '/start' => 'application#start'
+
   root :to => 'application#index'
 
 end

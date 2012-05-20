@@ -168,7 +168,7 @@ header {
     box-shadow: -5px 5px 5px $dark-turq;
     margin: 0 70px 0 0;
     color: $navy;
-    padding: 8px;
+    padding: 16px;
     position: relative;
 
     .hello-user {
@@ -857,4 +857,82 @@ ul.login {
       weight: bold;
     }
   }
+}
+
+.index-right, .index-left, .index-bottom, .index-other-activities {
+  background: white;
+  border: 2px solid black;
+  padding: 1em;
+  @include boxSizing;
+  line-height: 1.5em;
+  border-radius: 1em;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.index-wrap {
+  @include clearfix;
+  min-height: 250px;
+
+  .index-right, .index-left {
+    float: right;
+    width: 48%;
+    min-height: 250px;
+  }
+
+  .index-right {
+    margin-left: 4%;
+    .no-idea {
+      margin: 1.5em 0;
+    }
+  }
+
+  .index-left {
+    .solution, .deed, .no-address {
+      margin-bottom: 1em;
+    }
+  }
+}
+
+.index-bottom {
+  margin-top: 2%;
+  width: 100%;
+
+  ol {
+    list-style: decimal;
+    padding-right: 2.5em;
+  }
+}
+
+.index-button-start {
+  margin: 4% auto;
+  width: 50%;
+  text-align: center;
+  font-size: 1.5em;
+  background: -moz-linear-gradient(center top , #8EC754 0%, #6EA835 100%) repeat scroll 0 0 transparent;
+  display: block;
+  color: white;
+  border: 2px solid grey;
+
+  a {
+    height: 100%;
+    width: 100%;
+    line-height: 3em;
+    text-decoration: none;
+    color: white;
+    display: block;
+  }
+}
+
+
+ol {
+  list-style: decimal;
+  padding-right: 2.5em;
+}
+
+.index-other-activities {
+  border: 2px solid green;
+
 }

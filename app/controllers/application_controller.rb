@@ -5,14 +5,6 @@ class ApplicationController < ActionController::Base
   respond_to :json
 
   def index
-    @tagged = FinalBakasha.all
-    untagged = Scan.all(:conditions => { :final_bakasha_id => nil })
-    untagged_with_bakasha = untagged.select { |s| s.bakashas_count > 0 }
-    if untagged_with_bakasha.length > 0
-      @next_scan = untagged_with_bakasha[rand(untagged_with_bakasha.length)]
-    else
-      @next_scan = untagged[rand(untagged.length)]
-    end
     @heading = 'welcome'
   end
 
@@ -31,6 +23,17 @@ class ApplicationController < ActionController::Base
       name = '-'
     end
     respond_with({ :haavara_name => name })
+  end
+
+  def start
+    @tagged = FinalBakasha.all
+    untagged = Scan.all(:conditions => { :final_bakasha_id => nil })
+    untagged_with_bakasha = untagged.select { |s| s.bakashas_count > 0 }
+    if untagged_with_bakasha.length > 0
+      @next_scan = untagged_with_bakasha[rand(untagged_with_bakasha.length)]
+    else
+      @next_scan = untagged[rand(untagged.length)]
+    end
   end
 
 end
