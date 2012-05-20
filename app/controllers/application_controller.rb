@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
 
   def index
     @heading = 'welcome'
+    @title = t('welcome')
   end
 
   def get_budget

@@ -911,10 +911,13 @@ ul.login {
   width: 50%;
   text-align: center;
   font-size: 1.5em;
-  background: -moz-linear-gradient(center top , #8EC754 0%, #6EA835 100%) repeat scroll 0 0 transparent;
+  background-color:  #8EC754;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#8EC754) , to(#6EA835));
+  background-image: -moz-linear-gradient(center top , #8EC754 0%, #6EA835 100%);
   display: block;
   color: white;
   border: 2px solid grey;
+  border-radius: 0.2em;
 
   a {
     height: 100%;
