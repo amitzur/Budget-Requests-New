@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120503194236) do
+ActiveRecord::Schema.define(:version => 20120521220818) do
 
   create_table "bakashas", :force => true do |t|
     t.date     "recv_date"
@@ -84,7 +84,7 @@ ActiveRecord::Schema.define(:version => 20120503194236) do
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
     t.string   "name"
-    t.integer  "facebook_id"
+    t.string   "facebook_id"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
