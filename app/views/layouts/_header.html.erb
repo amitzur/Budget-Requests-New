@@ -1,28 +1,41 @@
 <header>
-  <a href="/" ><img class="title-icon" src="/assets/Document-icon.png"/></a>
-  <div class="title">
-    <h1><%=t heading %></h1>
-    <div class='hello-user'>
-        <%=t :hello %>
-        <span class="hello-user-actions <% if user_signed_in? %>active<% end %>">
-            <span class='user-name'><%= current_user && current_user.name %></span> |
-            <span class='sign-out'><%=t :sign_out %></span>
-        </span>
-        <span class="hello-user-actions-guest <% unless user_signed_in? %>active<% end %>">
-            <span class='user-name-guest'><%=t :guest %></span> |
-            <span class='sign-in'><%=t :sign_in %></span>
-        </span>
-        <span class="connecting"><%=t :connecting %></span>
-        <span class="disconnecting"><%=t :disconnecting %></span>
+  <div class="upper">
+    <a href="/"><img class="logo" src="/logo.png"></a>
+    <div class="the-rest">
+      <div class="sub-title">
+        <h2>
+          <%=t :where_is_your_money %>
+        </h2>
+      </div>
+      <div class="title">
+        <h1>
+          <%=t :mikur %>
+        </h1>
+      </div>
     </div>
   </div>
-  <div class="anti-title">
-    <h1><%=t heading %></h1>
+  <div class="nav">
+    <a href="/"><%=t :bait %></a> |
+    <a href="/what-is-crowdsourcing"><%=t :what_is_crowdsourcing %></a> |
+    <a href="/about"><%=t :odot %></a> |
+    <a href="/help"><%=t :how_to_help %></a> |
+    <a href="http://www.hasadna.org.il/צור-קשר" target="_blank"><%=t :contact %></a>
   </div>
-  <% unless @subheading.nil? %>
-    <h2 class='subtitle'><%=t @subheading %></h2>
-  <% end %>
-  <div class="actions">
-    <div class="fb-like" data-href="http://www.developforpeople.com" data-send="true" data-width="450" data-show-faces="true" data-font="arial"></div>
+  <div class="login">
+    <%=t :hello %>
+    <span class="hello-user-actions <% if user_signed_in? %>active<% end %>">
+        <span class='user-name'><%= current_user && current_user.name %></span> |
+        <span class='sign-out'><%=t :sign_out %></span>
+    </span>
+    <span class="hello-user-actions-guest <% unless user_signed_in? %>active<% end %>">
+        <span class='user-name-guest'><%=t :guest %></span> |
+        <span class='sign-in'><%=t :sign_in %></span>
+    </span>
+    <span class="connecting"><%=t :connecting %></span>
+    <span class="disconnecting"><%=t :disconnecting %></span>
+  </div>
+  <div class="start">
+    <a href="/start"><%=t :to_watch_and_fill %></a>
   </div>
 </header>
+

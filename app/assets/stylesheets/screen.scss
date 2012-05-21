@@ -1,4 +1,6 @@
 @import "compass/reset";
+@import "compass/css3";
+@import "compass/utilities";
 
 @font-face {
   font-family: "Rutz_OERegularPro";
@@ -7,41 +9,6 @@
   src: url("/rutz_oeregpro-Rutz.eot") format("eot"), url("/rutz_oeregpro-Rutz.woff") format("woff"), url("/rutz_oeregpro-Rutz.svg") format("svg");
 }
 
- //////// fluid layout //////////////
-$columns: 12;
-$column-width: 60px;
-$gutter-width: 20px;
-$max-width: $columns * ($column-width + $gutter-width);
-
-$font-base: 15px;
-$font-base-line-height: 24px;
-
-@function em($target, $context: $font-base) {
-  @if $target == 0 { @return 0 }
-  @return $target / $context + 0em;
-}
-
-@function perc($width, $container-width: $max-width) {
-   @return percentage($width / $container-width);
-}
-
-@function lh($amount: 1, $context: $font-base) {
-   @return em($font-base-line-height * $amount, $context);
-}
-
-@mixin col($n, $padding: 0px, $border: 0px, $container-width: $max-width) {
-  float: right;
-  margin-right: percentage($gutter-width / $container-width);
-  width:  percentage(($n * ($column-width + $gutter-width) - $gutter-width - ($padding * 2) - ($border * 2)) / $container-width);
-  border-width: $border;
-  padding: em($padding, $font-base) percentage($padding / $container-width);
-}
-
-/////////////////////////
-
-
-
-
 
 $light-orange: #FFF3B6;
 $banana		: #F5DB58;
@@ -49,24 +16,11 @@ $turquise	: #016881;
 $dark-turq	: #024758;
 $navy		: #012D38;
 
-
-@mixin clearfix {
-    &:after {
-        content: ".";
-        visibility: hidden;
-        display: block;
-        clear: both;
-        line-height: 0;
-        height: 0;
-    }
-}
-
-@mixin userSelectNone {
-    -moz-user-select: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
+$blue       : #3F74AA;
+$green      : #8DC500;
+$light      : #ADD9E4;
+$very-light : #EEF7F9;
+$blue-text  : #243D7E;
 
 @mixin buttonGradient {
     background-color: $banana;
@@ -87,7 +41,7 @@ $navy		: #012D38;
 }
 
 @mixin formField($labelWidth:100px, $padding: 0.8em) {
-  @include clearfix;
+  @include pie-clearfix;
   padding: $padding;
 
   label {
@@ -134,121 +88,140 @@ $navy		: #012D38;
 }
 
 html {
-    width: 100%;
-    font-family: Rutz_OERegularPro,Arial,sans-serif;
-    min-height: 100%;
+  font-family: Rutz_OERegularPro,Arial,sans-serif;
 }
 
 body {
-  @include backgroundGradient;
-  @include clearfix;
-  padding: 10px;
-  max-width: 960px;
-  margin: 0 auto;
+  direction: rtl;
 }
-
-h1 {
-  font-size: 2em;
-  font-weight: bold;
-}
-
-h2 {
-    font-size: 1.2em;
-}
-
-h3, h4 {
-    margin: 0 0 10px 0;
-}
-
 
 header {
-  @include col(12);
-  position: relative;
-  @include clearfix;
-  min-height: 120px;
-  padding: 30px 0;
-  .title {
-    background-color: $light-orange;
-    -webkit-border-radius: 15px 0 0 15px;
-    -moz-border-radius: 15px 0 0 15px;
-    border: 1px solid $dark-turq;
-    box-shadow: -5px 5px 5px $dark-turq;
-    margin: 0 70px 0 0;
-    color: $navy;
-    padding: 16px;
+  $header-height: 120px;
+  $nav-height: 30px;
+  width: 100%;
+  .upper {
+    $upper-padding-top-bottom: 5px;
+    @include background-image(linear-gradient(top, white, $light));
+    padding: $upper-padding-top-bottom 18px;
+    height: $header-height - $nav-height - (2 * $upper-padding-top-bottom) - 1px;
     position: relative;
 
-    .hello-user {
-      float: left;
-      position:relative;
-      top: -1.45em;
+    img.logo {
+      float: right;
+    }
 
-      .hello-user-actions, .hello-user-actions-guest {
-        display: none;
-        &.active {
-          display: inline;
-        }
-      }
-      .sign-in, .sign-out {
-        cursor: pointer;
-        text-decoration: underline;
-        color: $turquise;
-        &:active {
-          color: $banana;
-        }
-
-        &.connecting {
-          display: none;
-        }
+    .the-rest {
+      h1 {
+        font-size: 2.1em;
+        margin-top: 0.2em;
+        text-indent: 3px;
+        font-size: 2.1em;
       }
 
-      .connecting, .disconnecting {
-        display: none;
-        &.active {
-          display: inline;
-        }
+      h2 {
+        margin-top: 0.9em;
+        text-indent: 3px;
       }
     }
   }
 
-  .anti-title {
-    background-color: $light-orange;
-    -webkit-border-radius: 15px 0 0 15px;
-    -moz-border-radius: 15px 0 0 15px;
-    border: 1px solid $dark-turq;
-    box-shadow: -5px 5px 5px $dark-turq;
-    margin: 0 70px 0 0;
-    color: $navy;
-    padding: 8px;
-    position: relative;
-    -moz-transform: /*skew(-34deg) translateX(-11px)*/ rotateX(180deg) scaleY(0.7);
-    -webkit-transform: /*skew(-34deg) translateX(-11px)*/ rotateX(180deg) scaleY(0.7);
-    opacity: 0.2;
-  }
-
-  .subtitle {
-    @include col(7);
-    color: $navy;
-    margin-top: 20px;
-    font-style: italic;
+  .nav {
+    height: $nav-height;
+    line-height: $nav-height;
+    background-color: $blue;
+    border-top: 1px solid white;
+    padding: 0 28px;
+    color: white;
     font-size: 1.1em;
-    line-height: 1.2em;
+
+    a {
+      text-decoration: none;
+      color: white;
+      outline: none;
+      padding: 0 5px;
+    }
   }
 
-  .title-icon {
-    background-image: url(/assets/Document-icon.png);
-    width: 150px;
-    height: 150px;
-    background-size: 150px auto;
-    float: right;
-    position: relative;
-    top: -30px;
-    z-index: 1;
+  .login {
+    position: absolute;
+    left: 30px;
+    top: 10px;
+
+    .hello-user-actions, .hello-user-actions-guest {
+      display: none;
+      &.active {
+        display: inline;
+      }
+    }
+    .sign-in, .sign-out {
+      cursor: pointer;
+      text-decoration: underline;
+      color: $turquise;
+      &:active {
+        color: $banana;
+      }
+
+      &.connecting {
+        display: none;
+      }
+    }
+
+    .connecting, .disconnecting {
+      display: none;
+      &.active {
+        display: inline;
+      }
+    }
   }
 
-  .actions {
-    @include col(2);
-    margin-top: 20px;
+  .start {
+    position: absolute;
+    left: 30px;
+    top: 44px;
+    a {
+      display: block;
+      background: $green;
+      border: 1px solid green;
+      border-radius: 0.7em;
+      color: white;
+      text-decoration: none;
+      font-size: 1.2em;
+      height: 1.7em;
+      line-height: 1.7em;
+      padding: 0 1.675em;
+      outline: none;
+    }
+  }
+}
+
+.content {
+  position: relative;
+  padding: 60px 1em 1em 1em;
+  .fb-like {
+    position: absolute;
+    left: 0;
+    top: 0;
+    padding: 1em 0;
+  }
+}
+
+footer {
+  background: $very-light;
+  height: 40px;
+  position: relative;
+  text-align: left;
+  padding: 3px 10px;
+
+  span {
+    font-size: 1.2em;
+    margin-left: 10px;
+    line-height: 40px;
+    color: $blue-text;
+  }
+
+  a.hasadna {
+    float: left;
+    display: block;
   }
 }
 
@@ -273,7 +246,7 @@ header {
 
 
 .detail {
-  @include clearfix;
+  @include pie-clearfix;
 }
 
 .bakasha {
@@ -608,26 +581,15 @@ header {
 }
 
 .divider {
-    width: 4px;
-    height: 100%;
-    float: right;
-    border-left: 2px solid white;
-    border-right: 1px solid black;
-    cursor: col-resize;
-    position: relative;
-    z-index: 1;
-    background-color: #CCC;
-    box-shadow: -1px 0 1px #333;
+  width: 100%;
+  height: 0;
+  border-top: 1px dashed silver;
+  margin: 2em 0;
 }
 
 
 ul.login {
     @include smallForm;
-}
-
-.content {
-  @include col(12);
-  padding: 10px;
 }
 
 @mixin list {
@@ -647,8 +609,8 @@ ul.login {
 }
 
 .scans-wrap {
-  @include col(4);
-  vertical-align: top;
+  margin: 20px auto 0 auto;
+  width: 50%;
 
   ul.scans {
     @include list;
@@ -656,21 +618,30 @@ ul.login {
     &.untagged {
       text-align: center;
       &:hover {
-        background-color: $banana;
+        background-color: $green;
+        border-color: green;
         opacity: 0.8;
         cursor: pointer;
+        a { color: white; }
       }
 
       .click-here {
         display: none;
-        color: green;
+        color: white;
         font-weight: bold;
       }
       .click-here-connecting {
         display: none;
-        color: black;
+        color: white;
       }
       &.unlogged {
+        &:hover {
+          background-color: red;
+          border-color: green;
+          opacity: 0.8;
+          cursor: pointer;
+          color: white;
+        }
         li {
           padding: 2em;
 
@@ -758,7 +729,7 @@ ul.login {
 .bakashas-list {
   @include list;
   li {
-    @include clearfix;
+    @include pie-clearfix;
   }
 
   .fields {
@@ -880,19 +851,23 @@ ul.login {
 }
 
 .index-wrap {
-  @include clearfix;
-  min-height: 250px;
+  @include pie-clearfix;
 
   .index-right, .index-left {
     float: right;
-    width: 48%;
-    min-height: 250px;
+    width: 48.5%;
+    min-height: 220px;
   }
 
   .index-right {
-    margin-left: 4%;
+    margin-left: 3%;
     .no-idea {
       margin: 1.5em 0;
+    }
+    .welcome {
+      font-weight: bold;
+      font-size: 1.3em;
+      margin-bottom: 1em;
     }
   }
 
@@ -914,25 +889,22 @@ ul.login {
 }
 
 .index-button-start {
-  margin: 4% auto;
-  width: 50%;
-  text-align: center;
-  font-size: 1.5em;
-  background-color:  #8EC754;
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#8EC754) , to(#6EA835));
-  background-image: -moz-linear-gradient(center top , #8EC754 0%, #6EA835 100%);
-  display: block;
-  color: white;
-  border: 2px solid grey;
-  border-radius: 0.2em;
+
 
   a {
-    height: 100%;
-    width: 100%;
-    line-height: 3em;
-    text-decoration: none;
-    color: white;
+    width: 250px;
+    margin: 2em auto;
     display: block;
+    background: #8DC500;
+    border: 1px solid green;
+    border-radius: 0.7em;
+    color: white;
+    text-decoration: none;
+    font-size: 1.2em;
+    height: 2em;
+    line-height: 2em;
+    text-align: center;
+    outline: none;
   }
 }
 
@@ -944,5 +916,56 @@ ol {
 
 .index-other-activities {
   border: 2px solid green;
+
+}
+
+h1.scans {
+  font-size: 2.3em;
+  margin: 0 0 1em 0;
+}
+
+.to-the-scans {
+  font-size: 0.9em;
+}
+
+.about {
+  max-width: 720px;
+  margin: 0 auto;
+
+  h1 {
+    font-size: 2.4em;
+    margin-bottom: 1em;
+  }
+  p {
+    margin: 1em 0;
+    line-height: 1.1em;
+  }
+  img {
+    display: block;
+    margin: 1em auto 0;
+  }
+  span {
+    font-size: 0.9em;
+    color: grey;
+    display: block;
+    text-align: center;
+  }
+}
+
+.crowdsourcing {
+
+}
+
+.help {
+
+}
+
+.under-construction {
+ img {
+   vertical-align: middle;
+ }
+
+  font-size: 3em;
+  color: $blue-text;
 
 }
