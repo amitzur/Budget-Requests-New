@@ -5,8 +5,7 @@ class ApplicationController < ActionController::Base
   respond_to :json
 
   def index
-    @heading = 'welcome'
-    @title = t('welcome')
+    @title = t(:title) + ' - ' + t(:bait)
   end
 
   def get_budget
@@ -38,11 +37,11 @@ class ApplicationController < ActionController::Base
   end
 
   def crowdsourcing
-
+    @title = t(:title) + ' - ' + t(:what_is_crowdsourcing)
   end
 
   def about
-
+    @title = t(:title) + ' - ' + t(:odot)
   end
 
   def contact
@@ -50,7 +49,7 @@ class ApplicationController < ActionController::Base
   end
 
   def help
-
+    @title = t(:title) + ' - ' + t(:how_to_help)
   end
 
 end
