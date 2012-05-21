@@ -45,7 +45,7 @@ class ApplicationController < ActionController::Base
   end
 
   def contact
-
+    @title = t(:title) + ' - ' + t(:contact)
   end
 
   def help

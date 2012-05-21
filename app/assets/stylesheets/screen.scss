@@ -101,7 +101,7 @@ header {
   width: 100%;
   .upper {
     $upper-padding-top-bottom: 5px;
-    @include background-image(linear-gradient(top, white, $light));
+    background-color: snow;
     padding: $upper-padding-top-bottom 18px;
     height: $header-height - $nav-height - (2 * $upper-padding-top-bottom) - 1px;
     position: relative;
@@ -197,6 +197,8 @@ header {
 .content {
   position: relative;
   padding: 80px 1em 1em 1em;
+  max-width: 1020px;
+  margin: 0 auto;
   .fb-like {
     position: absolute;
     left: 0;
@@ -889,15 +891,13 @@ ul.login {
 }
 
 .index-button-start {
-
-
   a {
-    width: 250px;
-    margin: 2em auto;
+    width: 50%;
+    margin: 1em auto;
     display: block;
     background: #8DC500;
     border: 1px solid green;
-    border-radius: 0.7em;
+    border-radius: 0.4em;
     color: white;
     text-decoration: none;
     font-size: 1.2em;
@@ -905,6 +905,11 @@ ul.login {
     line-height: 2em;
     text-align: center;
     outline: none;
+    font-size: 2em;
+
+    &:hover {
+      opacity: 0.8;
+    }
   }
 }
 
@@ -960,6 +965,36 @@ h1.scans {
 
 }
 
+.contact {
+  margin-bottom: 3em;
+
+  h1 {
+    font-size: 2.3em;
+    margin-bottom: 1em;
+  }
+
+  h2 {
+    font-size: 1.6em;
+    margin: 1em 0;
+  }
+
+  a.hasadna-link {
+    display: block;
+    font-size: 1.6em;
+    text-indent: 1em;
+  }
+
+  a.mail-link {
+    display: block;
+    font-size: 1.6em;
+    text-indent: 1em;
+  }
+
+  .to-hasadna, .to-mail {
+    margin-top: 4em;
+  }
+}
+
 .under-construction {
  img {
    vertical-align: middle;
@@ -967,5 +1002,4 @@ h1.scans {
 
   font-size: 3em;
   color: $blue-text;
-
 }
